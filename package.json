@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+<<<<<<< HEAD
     "start": "node dist/index.js",
     "test": "node --watch dist/index.js",
     "dev": "ts-node src/app.ts",
@@ -37,4 +38,11 @@
     "node": "18.14.2",
     "npm": "9.5.0"
   }
+=======
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+>>>>>>> 2a70d88 (feat: node config (#1))
 }
