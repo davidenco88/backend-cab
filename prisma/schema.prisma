@@ -11,16 +11,18 @@ datasource db {
 }
 
 model Users {
-  id     Int    @id @default(autoincrement())
-  name   String
-  email  String @unique
-  avatar String
-  rol    Rol    @relation(fields: [rol_id], references: [id])
-  rol_id Int
+  id       Int     @id @default(autoincrement())
+  name     String
+  email    String  @unique
+  avatar   String
+  rol      Rol?    @relation(fields: [rol_id], references: [id])
+  rol_id   Int?
+  isActive Boolean @default(false)
 }
 
 model Rol {
-  id    Int     @id @default(autoincrement())
-  name  String
-  users Users[]
+  id       Int     @id @default(autoincrement())
+  name     String
+  isActive Boolean @default(false)
+  users    Users[]
 }
