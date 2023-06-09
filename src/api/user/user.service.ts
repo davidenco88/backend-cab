@@ -6,14 +6,12 @@ export async function createUser(
   name :  string,
   email : string,
   avatar: string,
-  rol_id : number,
 ) {
   const user = await prisma.users.create({
     data:{
       name,
       email,
       avatar,
-      rol_id,
       isActive: true
     }
   })
@@ -53,14 +51,12 @@ export async function updateUser(
   name :  string,
   email : string,
   avatar: string,
-  rol_id : number,
   isActive: boolean
   ) {
     const data = {
       name,
       email,
       avatar,
-      rol_id,
       isActive
     };
   const updateUser = await prisma.users.update({
