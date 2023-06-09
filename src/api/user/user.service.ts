@@ -2,7 +2,23 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export async function createUser() {
+export async function createUser(
+  name :  string,
+  email : string,
+  avatar: string,
+  rol_id : number,
+) {
+  const user = await prisma.users.create({
+    data:{
+      name,
+      email,
+      avatar,
+      rol_id,
+      isActive: true
+    }
+  })
+
+  return user;
 
 }
 
@@ -20,10 +36,38 @@ export async function getUserById(id: number) {
   return user;
 }
 
-export async function deleteUser() {
-
+export async function deleteUser(id: number) {
+  const updateUser = await prisma.users.update({
+    where: {
+      id,
+    },
+    data: {
+      isActive: false,
+    },
+  })
+  return updateUser;
 }
 
-export async function updateUser() {
-
+export async function updateUser(
+  id: number,
+  name :  string,
+  email : string,
+  avatar: string,
+  rol_id : number,
+  isActive: boolean
+  ) {
+    const data = {
+      name,
+      email,
+      avatar,
+      rol_id,
+      isActive
+    };
+  const updateUser = await prisma.users.update({
+    where: {
+      id,
+    },
+    data
+  })
+  return updateUser;
 }
