@@ -11,18 +11,85 @@ datasource db {
 }
 
 model Users {
-  id       Int     @id @default(autoincrement())
-  name     String
-  email    String  @unique
-  avatar   String
-  rol      Rol?    @relation(fields: [rol_id], references: [id])
-  rol_id   Int?
-  isActive Boolean @default(false)
+  id            Int             @id @default(autoincrement())
+  name          String
+  email         String          @unique
+  avatar        String
+  isActive      Boolean         @default(false)
+  UserByRole    UserByRole[]
+  DiscountCodes DiscountCodes[]
+  Vehicles      Vehicles[]
 }
 
 model Rol {
-  id       Int     @id @default(autoincrement())
-  name     String
-  isActive Boolean @default(false)
-  users    Users[]
+  id         Int          @id @default(autoincrement())
+  name       String
+  isActive   Boolean      @default(false)
+  UserByRole UserByRole[]
+}
+
+model UserByRole {
+  id      Int   @id @default(autoincrement())
+  Rol     Rol   @relation(fields: [rolId], references: [id])
+  rolId   Int
+  Users   Users @relation(fields: [usersId], references: [id])
+  usersId Int
+}
+
+model DiscountCodes {
+  id        Int     @id @default(autoincrement())
+  code      String
+  isActive  Boolean @default(false)
+  Users     Users   @relation(fields: [creatorID], references: [id])
+  creatorID Int
+  Trips     Trips[]
+}
+
+model Vehicles {
+  id            Int          @id @default(autoincrement())
+  Users         Users        @relation(fields: [dirverID], references: [id])
+  dirverID      Int
+  VehicleTypes  VehicleTypes @relation(fields: [vehicleTypeID], references: [id])
+  vehicleTypeID Int
+  name          String
+  plates        String
+  isAvailable   Boolean      @default(true)
+  isActive      Boolean      @default(true)
+}
+
+model VehicleTypes {
+  id          Int           @id @default(autoincrement())
+  Vehicles    Vehicles[]
+  name        String
+  seats       Int
+  luggage     String
+  ServiceType ServiceType[]
+}
+
+model ServiceType {
+  id             Int          @id @default(autoincrement())
+  VehicleTypes   VehicleTypes @relation(fields: [vehicleTypesId], references: [id])
+  vehicleTypesId Int
+  feeBase        Int
+}
+
+model Trips {
+  id                Int            @id @default(autoincrement())
+  pickUpLatitude    String
+  pickUpLongitude   String
+  dropDownLatitude  String
+  dropDownLongitude String
+  travelledDistance Int
+  totalPrice        Int
+  pickUpDate        DateTime
+  DiscountCodes     DiscountCodes? @relation(fields: [discountCodeId], references: [id])
+  discountCodeId    Int?
+  TripState         TripState?     @relation(fields: [tripStateId], references: [id])
+  tripStateId       Int?
+}
+
+model TripState {
+  id    Int     @id @default(autoincrement())
+  name  String
+  Trips Trips[]
 }
