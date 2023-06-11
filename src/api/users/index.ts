@@ -5,7 +5,7 @@ import {
   getUserByIdHandler,
   updateUserHandler,
   deleteUserHandler,
-} from './user.controller'
+} from './users.controller'
 
 const userRouter = Router();
 

@@ -1,16 +1,12 @@
 import { PrismaClient } from "@prisma/client";
+import { rolesCreateData } from './roles.type';
 
 const prisma = new PrismaClient();
 
-export async function createRol(
-  name :  string,
-
-) {
+export async function createRol(data :  rolesCreateData)
+ {
   const rol = await prisma.rol.create({
-    data:{
-      name,
-      isActive: true
-    }
+    data
   })
 
   return rol;
@@ -45,13 +41,9 @@ export async function deleteRol(id: number) {
 
 export async function updateRol(
   id: number,
-  name :  string,
-  isActive: boolean
+  data: rolesCreateData
   ) {
-    const data = {
-      name,
-      isActive
-    };
+
   const updateRol = await prisma.rol.update({
     where: {
       id,

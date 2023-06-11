@@ -5,7 +5,7 @@ import {
   getRolByIdHandler,
   updateRolHandler,
   deleteRolHandler,
-} from './rol.controller'
+} from './roles.controller'
 
 const RolRouter = Router();
 

@@ -1,19 +1,12 @@
 import { PrismaClient } from "@prisma/client";
+import { useresCreateData } from './users.type';
 
 const prisma = new PrismaClient();
 
-export async function createUser(
-  name :  string,
-  email : string,
-  avatar: string,
+export async function createUser(data: useresCreateData
 ) {
   const user = await prisma.users.create({
-    data:{
-      name,
-      email,
-      avatar,
-      isActive: true
-    }
+    data
   })
 
   return user;
@@ -48,17 +41,9 @@ export async function deleteUser(id: number) {
 
 export async function updateUser(
   id: number,
-  name :  string,
-  email : string,
-  avatar: string,
-  isActive: boolean
+  data: useresCreateData
   ) {
-    const data = {
-      name,
-      email,
-      avatar,
-      isActive
-    };
+
   const updateUser = await prisma.users.update({
     where: {
       id,

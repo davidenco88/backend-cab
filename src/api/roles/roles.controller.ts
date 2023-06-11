@@ -5,7 +5,7 @@ import {
   getRolById,
   updateRol,
   deleteRol,
-} from './rol.service'
+} from './roles.service'
 
 export async function createRolHandler(req: Request, res: Response) {
   const { name } = req.params;
