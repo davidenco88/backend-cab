@@ -24,7 +24,7 @@ function routes(app: Application) {
   app.use('/api/vehicleTypes', vehicleTypeRouter);
   app.use('/api/tripStates', tripStateRouter);
   app.use('/api/trips', tripRouter);
-  app.use('/api/trips', serviceTypeRouter);
+  app.use('/api/serviceTypes', serviceTypeRouter);
 }
 
 export default routes;
