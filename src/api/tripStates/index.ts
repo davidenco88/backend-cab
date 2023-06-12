@@ -19,10 +19,10 @@ tripStateRouter.get('/', getAllTripStateHandler);
 tripStateRouter.get('/:id', getTripStateByIdHandler);
 
 // /api/users --> PATHC
-tripStateRouter.patch('/', updateTripStateByIdHandler);
+tripStateRouter.patch('/:id', updateTripStateByIdHandler);
 
 // /api/users --> DELETE
-tripStateRouter.patch('/:id', deleteTripStateHandler);
+tripStateRouter.patch('/delete/:id', deleteTripStateHandler);
 
 
 export default tripStateRouter;

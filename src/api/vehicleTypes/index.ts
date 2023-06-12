@@ -19,7 +19,7 @@ vehicleTypeRouter.get('/', getAllVehicleTypeHandler);
 vehicleTypeRouter.get('/:id', getVehicleTypeByIdHandler);
 
 // /api/users --> PATHC
-vehicleTypeRouter.patch('/', updateVehicleTypeByIdHandler);
+vehicleTypeRouter.patch('/:id', updateVehicleTypeByIdHandler);
 
 // /api/users --> DELETE
 vehicleTypeRouter.patch('/:id', deleteVehicleTypeHandler);

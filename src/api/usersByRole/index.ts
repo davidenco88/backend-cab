@@ -19,7 +19,7 @@ usersByRoleRouter.get('/', getAllUsersByRoleHandler);
 usersByRoleRouter.get('/:id', getUsersByRoleByIdHandler);
 
 // /api/usersByRoles --> PATHC
-usersByRoleRouter.patch('/', updateUsersByRoleHandler);
+usersByRoleRouter.patch('/:id', updateUsersByRoleHandler);
 
 // /api/usersByRoles --> DELETE
 usersByRoleRouter.patch('/:id', deleteUsersByRoleHandler);

@@ -19,10 +19,10 @@ serviceTypeRouter.get('/', getAllServiceTypeHandler);
 serviceTypeRouter.get('/:id', getServiceTypeByIdHandler);
 
 // /api/users --> PATHC
-serviceTypeRouter.patch('/', updateServiceTypeByIdHandler);
+serviceTypeRouter.patch('/:id', updateServiceTypeByIdHandler);
 
 // /api/users --> DELETE
-serviceTypeRouter.patch('/:id', deleteServiceTypeHandler);
+serviceTypeRouter.patch('/delete/:id', deleteServiceTypeHandler);
 
 
 export default serviceTypeRouter;

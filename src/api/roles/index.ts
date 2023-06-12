@@ -19,10 +19,10 @@ RolRouter.get('/', getAllRolHandler);
 RolRouter.get('/:id', getRolByIdHandler);
 
 // /api/Rols --> PATHC
-RolRouter.patch('/', updateRolHandler);
+RolRouter.patch('/:id', updateRolHandler);
 
 // /api/Rols --> DELETE
-RolRouter.patch('/:id', deleteRolHandler);
+RolRouter.patch('/delete/:id', deleteRolHandler);
 
 
 export default RolRouter;

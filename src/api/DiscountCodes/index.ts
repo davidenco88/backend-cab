@@ -19,10 +19,10 @@ discountCodeRouter.get('/', getAllDiscountCodeHandler);
 discountCodeRouter.get('/:id', getDiscountCodeByIdHandler);
 
 // /api/DiscountCodes --> PATHC
-discountCodeRouter.patch('/', updateDiscountCodeHandler);
+discountCodeRouter.patch('/:id', updateDiscountCodeHandler);
 
 // /api/DiscountCodes --> DELETE
-discountCodeRouter.patch('/:id', deleteDiscountCodeHandler);
+discountCodeRouter.patch('/delete/:id', deleteDiscountCodeHandler);
 
 
 export default discountCodeRouter;

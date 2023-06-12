@@ -19,10 +19,10 @@ userRouter.get('/', getAllUserHandler);
 userRouter.get('/:id', getUserByIdHandler);
 
 // /api/users --> PATHC
-userRouter.patch('/', updateUserHandler);
+userRouter.patch('/:id', updateUserHandler);
 
 // /api/users --> DELETE
-userRouter.patch('/:id', deleteUserHandler);
+userRouter.patch('/delete/:id', deleteUserHandler);
 
 
 export default userRouter;
