@@ -5,7 +5,7 @@ import {
   getUserByIdHandler,
   updateUserHandler,
   deleteUserHandler,
-} from './user.controller'
+} from './users.controller'
 
 const userRouter = Router();
 
@@ -19,10 +19,10 @@ userRouter.get('/', getAllUserHandler);
 userRouter.get('/:id', getUserByIdHandler);
 
 // /api/users --> PATHC
-userRouter.patch('/', updateUserHandler);
+userRouter.patch('/:id', updateUserHandler);
 
 // /api/users --> DELETE
-userRouter.delete('/:id', deleteUserHandler);
+userRouter.patch('/delete/:id', deleteUserHandler);
 
 
 export default userRouter;
