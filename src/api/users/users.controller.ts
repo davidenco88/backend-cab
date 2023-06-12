@@ -65,7 +65,7 @@ export async function deleteUserHandler(
   }
 }
 
-export async function updateUserByIdHandler(
+export async function updateUserHandler(
   req: Request,
   res: Response,
   next: NextFunction

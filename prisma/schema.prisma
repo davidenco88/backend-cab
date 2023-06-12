@@ -29,11 +29,12 @@ model Rol {
 }
 
 model UserByRole {
-  id      Int   @id @default(autoincrement())
-  Rol     Rol   @relation(fields: [rolId], references: [id])
-  rolId   Int
-  Users   Users @relation(fields: [usersId], references: [id])
-  usersId Int
+  id       Int     @id @default(autoincrement())
+  Rol      Rol     @relation(fields: [rolId], references: [id])
+  rolId    Int
+  Users    Users   @relation(fields: [usersId], references: [id])
+  usersId  Int
+  isActive Boolean @default(true)
 }
 
 model DiscountCodes {
@@ -64,6 +65,7 @@ model VehicleTypes {
   seats       Int
   luggage     String
   ServiceType ServiceType[]
+  isActive    Boolean       @default(true)
 }
 
 model ServiceType {
@@ -71,6 +73,7 @@ model ServiceType {
   VehicleTypes   VehicleTypes @relation(fields: [vehicleTypesId], references: [id])
   vehicleTypesId Int
   feeBase        Int
+  isActive       Boolean      @default(true)
 }
 
 model Trips {
@@ -86,10 +89,12 @@ model Trips {
   discountCodeId    Int?
   TripState         TripState?     @relation(fields: [tripStateId], references: [id])
   tripStateId       Int?
+  isActive          Boolean        @default(true)
 }
 
 model TripState {
-  id    Int     @id @default(autoincrement())
-  name  String
-  Trips Trips[]
+  id       Int     @id @default(autoincrement())
+  name     String
+  Trips    Trips[]
+  isActive Boolean @default(true)
 }
