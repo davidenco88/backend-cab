@@ -22,7 +22,7 @@ discountCodeRouter.get('/:id', getDiscountCodeByIdHandler);
 discountCodeRouter.patch('/', updateDiscountCodeHandler);
 
 // /api/DiscountCodes --> DELETE
-discountCodeRouter.delete('/:id', deleteDiscountCodeHandler);
+discountCodeRouter.patch('/:id', deleteDiscountCodeHandler);
 
 
 export default discountCodeRouter;

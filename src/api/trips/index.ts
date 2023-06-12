@@ -22,7 +22,7 @@ tripRouter.get('/:id', getTripByIdHandler);
 tripRouter.patch('/', updateTripByIdHandler);
 
 // /api/users --> DELETE
-tripRouter.delete('/:id', deleteTripHandler);
+tripRouter.patch('/:id', deleteTripHandler);
 
 
 export default tripRouter;

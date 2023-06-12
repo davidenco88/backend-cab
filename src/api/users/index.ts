@@ -22,7 +22,7 @@ userRouter.get('/:id', getUserByIdHandler);
 userRouter.patch('/', updateUserHandler);
 
 // /api/users --> DELETE
-userRouter.delete('/:id', deleteUserHandler);
+userRouter.patch('/:id', deleteUserHandler);
 
 
 export default userRouter;

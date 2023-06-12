@@ -22,7 +22,7 @@ usersByRoleRouter.get('/:id', getUsersByRoleByIdHandler);
 usersByRoleRouter.patch('/', updateUsersByRoleHandler);
 
 // /api/usersByRoles --> DELETE
-usersByRoleRouter.delete('/:id', deleteUsersByRoleHandler);
+usersByRoleRouter.patch('/:id', deleteUsersByRoleHandler);
 
 
 export default usersByRoleRouter;

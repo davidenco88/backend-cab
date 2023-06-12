@@ -22,7 +22,7 @@ RolRouter.get('/:id', getRolByIdHandler);
 RolRouter.patch('/', updateRolHandler);
 
 // /api/Rols --> DELETE
-RolRouter.delete('/:id', deleteRolHandler);
+RolRouter.patch('/:id', deleteRolHandler);
 
 
 export default RolRouter;

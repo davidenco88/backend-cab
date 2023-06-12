@@ -22,7 +22,7 @@ serviceTypeRouter.get('/:id', getServiceTypeByIdHandler);
 serviceTypeRouter.patch('/', updateServiceTypeByIdHandler);
 
 // /api/users --> DELETE
-serviceTypeRouter.delete('/:id', deleteServiceTypeHandler);
+serviceTypeRouter.patch('/:id', deleteServiceTypeHandler);
 
 
 export default serviceTypeRouter;

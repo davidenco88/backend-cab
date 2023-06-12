@@ -22,7 +22,7 @@ vehicleRouter.get('/:id', getVehicleByIdHandler);
 vehicleRouter.patch('/', updateVehicleByIdHandler);
 
 // /api/users --> DELETE
-vehicleRouter.delete('/:id', deleteVehicleHandler);
+vehicleRouter.patch('/:id', deleteVehicleHandler);
 
 
 export default vehicleRouter;
