@@ -43,7 +43,8 @@ export async function updateUser(
   id: number,
   data: usersCreateData
   ) {
-
+console.log(id)
+console.log(data)
   const updateUser = await prisma.users.update({
     where: {
       id,

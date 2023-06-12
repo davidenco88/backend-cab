@@ -33,7 +33,7 @@ export async function getDiscountCodeByIdHandler(
   res: Response,
   next: NextFunction
 ) {
-  const { id } = req.params;
+  const { id } = req.body;
   const integerId = Number(id);
 
   try {
@@ -53,7 +53,7 @@ export async function deleteDiscountCodeHandler(
   res: Response,
   next: NextFunction
 ) {
-  const { id } = req.params;
+  const { id } = req.body;
   const integerId = Number(id);
 
 
@@ -70,7 +70,7 @@ export async function updateDiscountCodeHandler(
   res: Response,
   next: NextFunction
 ) {
-  const { id } = req.params;
+  const { id } = req.body;
   const integerId = Number(id);
   const data = req.body;
 

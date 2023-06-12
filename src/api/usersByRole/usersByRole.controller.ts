@@ -33,7 +33,7 @@ export async function getUsersByRoleByIdHandler(
   res: Response,
   next: NextFunction
 ) {
-  const { id } = req.params;
+  const { id } = req.body;
   const integerId = Number(id);
 
   try {
@@ -53,7 +53,7 @@ export async function deleteUsersByRoleHandler(
   res: Response,
   next: NextFunction
 ) {
-  const { id } = req.params;
+  const { id } = req.body;
   const integerId = Number(id);
 
 
@@ -70,7 +70,7 @@ export async function updateUsersByRoleHandler(
   res: Response,
   next: NextFunction
 ) {
-  const { id } = req.params;
+  const { id } = req.body;
   const integerId = Number(id);
   const data = req.body;
 

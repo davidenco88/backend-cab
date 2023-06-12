@@ -33,7 +33,7 @@ export async function getUserByIdHandler(
   res: Response,
   next: NextFunction
 ) {
-  const { id } = req.params;
+  const { id } = req.body;
   const integerId = Number(id);
 
   try {
@@ -53,7 +53,7 @@ export async function deleteUserHandler(
   res: Response,
   next: NextFunction
 ) {
-  const { id } = req.params;
+  const { id } = req.body;
   const integerId = Number(id);
 
 
@@ -70,10 +70,10 @@ export async function updateUserHandler(
   res: Response,
   next: NextFunction
 ) {
-  const { id } = req.params;
+  const { id } = req.body;
   const integerId = Number(id);
   const data = req.body;
-
+  console.log(data);
   try {
     const user = await updateUser(integerId, data);
     return res.json(user);
