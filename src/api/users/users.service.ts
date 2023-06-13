@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { usersCreateData } from './users.type';
+import { usersCreateData , updateUser } from './users.type';
 
 const prisma = new PrismaClient();
 
@@ -41,7 +41,7 @@ export async function deleteUser(id: number) {
 
 export async function updateUser(
   id: number,
-  data: usersCreateData
+  data: updateUser
   ) {
 console.log(id)
 console.log(data)
