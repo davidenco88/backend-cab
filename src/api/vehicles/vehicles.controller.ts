@@ -33,7 +33,7 @@ export async function getVehicleByIdHandler(
   res: Response,
   next: NextFunction
 ) {
-  const { id } = req.body;
+  const { id } = req.params;
   const integerId = Number(id);
 
   try {
@@ -53,7 +53,7 @@ export async function deleteVehicleHandler(
   res: Response,
   next: NextFunction
 ) {
-  const { id } = req.body;
+  const { id } = req.params;
   const integerId = Number(id);
 
 
@@ -70,7 +70,7 @@ export async function updateVehicleByIdHandler(
   res: Response,
   next: NextFunction
 ) {
-  const { id } = req.body;
+  const { id } = req.params;
   const integerId = Number(id);
   const data = req.body;
 
