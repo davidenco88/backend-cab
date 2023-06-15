@@ -3,8 +3,7 @@ import { usersByRoleCreateData } from './usersByRole.type';
 
 const prisma = new PrismaClient();
 
-export async function createUsersByRole(data: usersByRoleCreateData
-) {
+export async function createUsersByRole(data: usersByRoleCreateData) {
   const usersByRole = await prisma.userByRole.create({
     data
   })
