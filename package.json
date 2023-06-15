@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node dist/index.js",
+    "start": "node dist/app.js",
     "dev": "ts-node-dev --respawn src/app.ts",
     "build": "tsc"
   },
@@ -14,10 +14,12 @@
   "devDependencies": {
     "@commitlint/cli": "^17.6.5",
     "@commitlint/config-conventional": "^17.6.5",
+    "@types/bcrypt": "^5.0.0",
     "@types/cors": "^2.8.13",
     "@types/express": "^4.17.17",
     "@types/morgan": "^1.9.4",
     "@typescript-eslint/eslint-plugin": "^5.59.9",
+    "dotenv": "^16.1.4",
     "eslint": "^8.42.0",
     "eslint-config-standard-with-typescript": "^35.0.0",
     "eslint-plugin-import": "^2.27.5",
@@ -31,9 +33,13 @@
   },
   "dependencies": {
     "@prisma/client": "^4.15.0",
+    "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "morgan": "^1.10.0"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   },
   "volta": {
     "node": "18.14.2",
