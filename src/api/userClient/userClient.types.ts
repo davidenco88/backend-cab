@@ -16,9 +16,3 @@ export type UserClient = {
   avatar: string;
   rol_id?: number;
 };
-
-export type RolClient = {
-  id?: number;
-  rol_id?: number;
-  user_id?: number;
-};
