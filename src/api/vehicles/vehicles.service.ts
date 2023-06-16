@@ -17,7 +17,10 @@ export async function getAllVehicles() {
   const vehicles = await prisma.vehicles.findMany();
   return vehicles;
 }
-
+export async function getAllVehiclesStatus() {
+  const vehicles = await prisma.vehicles.findMany();
+  return vehicles;
+}
 export async function getVehicleById(id: number) {
   const vehicle = await prisma.vehicles.findUnique({
     where: {
