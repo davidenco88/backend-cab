@@ -1,10 +1,10 @@
 import { Response } from 'express';
 import { compose } from 'compose-middleware';
 
-import { getUserByEmail } from '../api/user/user.service';
+import { getUserByEmail } from '../api/users/users.service';
 import { verifyToken } from './auth.service';
 import { AuthRequest, PayloadType } from './auth.types';
-import { UserWithRoles } from '../api/user/user.types';
+import { UserWithRoles } from '../api/users/users.type';
 
 /**
  * Attaches the user object to the request if authenticated
