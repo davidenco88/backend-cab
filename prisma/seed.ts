@@ -54,7 +54,53 @@ async function main() {
     ],
     skipDuplicates: true,
   });
+  await prisma.vehicleTypes.createMany({
+    data: [
+      { name: "Vehiculo epacioso", seats: 5 , luggage:"25 lts", isActive: true },
+      { name: "Vehiculo de lujo", seats: 3 , luggage:"25 lts", isActive: true },
+      { name: "Vehiculo economico", seats: 4 , luggage:"10 lts", isActive: true },
+    ],
+    skipDuplicates: true,
+  });
+  await prisma.serviceType.createMany({
+    data: [
+      { vehicleTypesId: 1, feeBase: 120 },
+      { vehicleTypesId: 2, feeBase: 150 },
+      { vehicleTypesId: 3, feeBase: 80 },
+    ],
+    skipDuplicates: true,
+  });
+  await prisma.vehicles.createMany({
+    data: [
+      {
+        name: 'Vehiculo generico 1',
+        dirverID: 3,
+        vehicleTypeID: 1,
+        plates: '1235486',
+        isAvailable: true,
+        isActive: true,
+      },
+      {
+        name: 'Vehiculo generico 2',
+        dirverID: 3,
+        vehicleTypeID: 2,
+        plates: '987456',
+        isAvailable: true,
+        isActive: true,
+      },
+      {
+        name: 'Vehiculo generico 3',
+        dirverID: 3,
+        vehicleTypeID: 3,
+        plates: '192846',
+        isAvailable: true,
+        isActive: true,
+      },
+    ],
+    skipDuplicates: true,
+  });
 }
+
 
 main()
   .then(async () => console.log('Seed successful'))
