@@ -19,7 +19,7 @@ export async function getAllVehicles() {
 }
 export async function getAllVehiclesStatus() {
 
-  const vehicles = await prisma.vehicles.findMany({
+  const vehiclesByStatus = await prisma.vehicles.findMany({
     include: {
       VehicleTypes: {
         include: {
@@ -28,7 +28,7 @@ export async function getAllVehiclesStatus() {
       }
     }
   })
-  return vehicles;
+  return vehiclesByStatus;
 }
 export async function getVehicleById(id: number) {
   const vehicle = await prisma.vehicles.findUnique({
