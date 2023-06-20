@@ -1,7 +1,15 @@
 import { Users } from '@prisma/client';
 import { Users as UserModel, Rol as RoleModel } from '@prisma/client';
 
-export type usersCreateData = Users;
+export type CreateUser = {
+  id?: number;
+  name: string;
+  lastname: string;
+  email: string;
+  avatar: string;
+  password: string;
+  rol_id: number[];
+};
 
 export type User = UserModel;
 

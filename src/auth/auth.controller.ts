@@ -62,3 +62,8 @@ export const middlewareRolAdmin = compose([
   isAuthenticated,
   hasRole(['Admin']),
 ]);
+
+export const middlewareAllRoles = compose([
+  isAuthenticated,
+  hasRole(['Admin', 'Client', 'Driver']),
+]);

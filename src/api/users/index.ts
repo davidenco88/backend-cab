@@ -1,16 +1,18 @@
-import { Router } from "express";
+import { Router } from 'express';
 import {
   createUserHandler,
   getAllUserHandler,
   getUserByIdHandler,
   updateUserHandler,
   deleteUserHandler,
-} from './users.controller'
+} from './users.controller';
+
+import { middlewareAllRoles } from '../../auth/auth.controller';
 
 const userRouter = Router();
 
 // /api/users --> POST
-userRouter.post('/', createUserHandler);
+userRouter.post('/', middlewareAllRoles, createUserHandler);
 
 // /api/users --> GET
 userRouter.get('/', getAllUserHandler);
@@ -24,6 +26,4 @@ userRouter.patch('/:id', updateUserHandler);
 // /api/users --> DELETE
 userRouter.patch('/delete/:id', deleteUserHandler);
 
-
 export default userRouter;
-
