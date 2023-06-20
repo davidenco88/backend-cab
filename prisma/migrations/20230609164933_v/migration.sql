@@ -36,7 +36,7 @@ CREATE TABLE "DiscountCodes" (
 -- CreateTable
 CREATE TABLE "Vehicles" (
     "id" SERIAL NOT NULL,
-    "dirverID" INTEGER NOT NULL,
+    "driverID" INTEGER NOT NULL,
     "vehicleTypeID" INTEGER NOT NULL,
     "name" TEXT NOT NULL,
     "plates" TEXT NOT NULL,
@@ -99,7 +99,7 @@ ALTER TABLE "UserByRole" ADD CONSTRAINT "UserByRole_usersId_fkey" FOREIGN KEY ("
 ALTER TABLE "DiscountCodes" ADD CONSTRAINT "DiscountCodes_creatorID_fkey" FOREIGN KEY ("creatorID") REFERENCES "Users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Vehicles" ADD CONSTRAINT "Vehicles_dirverID_fkey" FOREIGN KEY ("dirverID") REFERENCES "Users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Vehicles" ADD CONSTRAINT "Vehicles_driverID_fkey" FOREIGN KEY ("driverID") REFERENCES "Users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Vehicles" ADD CONSTRAINT "Vehicles_vehicleTypeID_fkey" FOREIGN KEY ("vehicleTypeID") REFERENCES "VehicleTypes"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

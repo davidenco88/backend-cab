@@ -74,7 +74,7 @@ async function main() {
     data: [
       {
         name: 'Vehiculo generico 1',
-        dirverID: 3,
+        driverID: 3,
         vehicleTypeID: 1,
         plates: '1235486',
         isAvailable: true,
@@ -82,7 +82,7 @@ async function main() {
       },
       {
         name: 'Vehiculo generico 2',
-        dirverID: 3,
+        driverID: 3,
         vehicleTypeID: 2,
         plates: '987456',
         isAvailable: true,
@@ -90,7 +90,7 @@ async function main() {
       },
       {
         name: 'Vehiculo generico 3',
-        dirverID: 3,
+        driverID: 3,
         vehicleTypeID: 3,
         plates: '192846',
         isAvailable: true,

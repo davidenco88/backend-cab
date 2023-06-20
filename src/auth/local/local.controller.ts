@@ -29,7 +29,7 @@ export async function loginHandler(req: Request, res: Response) {
     const token = signToken(payload);
 
     const profile = {
-      fullName: `${user.name}`,
+      fullName: `${user.name} `,
       avatar: user.avatar,
       roles: user.UserByRole.map(({ Rol }) => ({
         id: Rol.id,

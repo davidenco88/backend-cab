@@ -5,6 +5,7 @@ import {
   getUserByIdHandler,
   updateUserHandler,
   deleteUserHandler,
+  getAllUserInfoHandler,
 } from './users.controller'
 
 const userRouter = Router();
@@ -14,9 +15,10 @@ userRouter.post('/', createUserHandler);
 
 // /api/users --> GET
 userRouter.get('/', getAllUserHandler);
-
+userRouter.get('/info', getAllUserInfoHandler);
 // /api/users/:id --> GET
 userRouter.get('/:id', getUserByIdHandler);
+
 
 // /api/users --> PATHC
 userRouter.patch('/:id', updateUserHandler);

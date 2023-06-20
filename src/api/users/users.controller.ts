@@ -5,6 +5,7 @@ import {
   getUserById,
   updateUser,
   deleteUser,
+  getAllUserWithRoles
 } from './users.service'
 
 export async function createUserHandler(
@@ -27,6 +28,11 @@ export async function getAllUserHandler(req: Request, res: Response) {
   const users = await getAllUser();
   return res.json(users);
 }
+export async function getAllUserInfoHandler(req: Request, res: Response) {
+  const users = await getAllUserWithRoles();
+  return res.json(users);
+}
+
 
 export async function getUserByIdHandler(
   req: Request,
