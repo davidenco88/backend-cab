@@ -8,17 +8,27 @@ import {
   getAllUserWithRoles
 } from './users.service'
 
+import { CreateUser } from './users.type';
+
 export async function createUserHandler(
   req: Request,
   res: Response,
   next: NextFunction
 ) {
-  const data = req.body;
+  const data: CreateUser = req.body;
+
+  console.log(data);
+
+  if (Object.keys(data).length === 0) {
+    return res
+      .status(400)
+      .json({ message: 'Missing required information in the request body' });
+  }
 
   try {
     const user = await createUser(data);
 
-    return res.json(user);
+    return res.status(201).json(user);
   } catch (error) {
     return next(error);
   }
@@ -43,7 +53,7 @@ export async function getUserByIdHandler(
   const integerId = Number(id);
 
   try {
-     const user = await getUserById(integerId);
+    const user = await getUserById(integerId);
 
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
@@ -61,7 +71,6 @@ export async function deleteUserHandler(
 ) {
   const { id } = req.params;
   const integerId = Number(id);
-
 
   try {
     const user = await deleteUser(integerId);

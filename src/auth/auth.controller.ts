@@ -1,4 +1,4 @@
-import { Response } from 'express';
+import { Response, NextFunction } from 'express';
 import { compose } from 'compose-middleware';
 
 import { getUserByEmail } from '../api/users/users.service';
@@ -10,32 +10,33 @@ import { UserWithRoles } from '../api/users/users.type';
  * Attaches the user object to the request if authenticated
  * @returns RequestHandler
  */
-export function isAuthenticated() {
-  return compose([
-    async (req: AuthRequest, res: Response, next: any) => {
-      const token = req.headers?.authorization?.split(' ')[1];
+export async function isAuthenticated(
+  req: AuthRequest,
+  res: Response,
+  next: any
+) {
+  const token = req.headers?.authorization?.split(' ')[1];
 
-      if (!token) {
-        return res.status(401).json({ message: 'Unauthorized' });
-      }
+  if (!token) {
+    return res
+      .status(401)
+      .json({ message: 'Request does not have an authentication token' });
+  }
 
-      const decoded = verifyToken(token) as PayloadType;
+  const decoded = verifyToken(token) as PayloadType;
 
-      if (!decoded) {
-        return res.status(401).json({ message: 'Unauthorized' });
-      }
+  if (!decoded) {
+    return res.status(401).json({ message: 'Invalid authentication token' });
+  }
 
-      const user = await getUserByEmail(decoded.email);
+  const user = await getUserByEmail(decoded.email);
 
-      if (!user) {
-        return res.status(401).json({ message: 'Unauthorized' });
-      }
+  if (!user) {
+    return res.status(401).json({ message: 'User is not active' });
+  }
 
-      req.user = user;
-
-      return next();
-    },
-  ]);
+  req.user = user;
+  return next();
 }
 
 /**
@@ -44,18 +45,25 @@ export function isAuthenticated() {
  * @returns RequestHandler
  */
 export function hasRole(allowRoles: string[]) {
-  return compose([
-    isAuthenticated(),
-    (req: AuthRequest, res: Response, next: any) => {
-      const { roles } = req.user as UserWithRoles;
-      const userRoles = roles.map(({ role }: any) => role.name);
-      const hasPermission = allowRoles.some((role) => userRoles.includes(role));
+  return (req: AuthRequest, res: Response, next: any) => {
+    const { UserByRole } = req.user as UserWithRoles;
+    const userRoles = UserByRole.map((role: any) => role.Rol.name);
+    const hasPermission = allowRoles.some((role) => userRoles.includes(role));
 
-      if (!hasPermission) {
-        return res.status(403).json({ message: 'Forbidden' });
-      }
+    if (!hasPermission) {
+      return res.status(403).json({ message: 'Forbidden' });
+    }
 
-      return next();
-    },
-  ]);
+    return next();
+  };
 }
+
+export const middlewareRolAdmin = compose([
+  isAuthenticated,
+  hasRole(['Admin']),
+]);
+
+export const middlewareHasRol = compose([
+  isAuthenticated,
+  hasRole(['Admin', 'Client', 'Driver']),
+]);
