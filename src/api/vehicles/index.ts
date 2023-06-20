@@ -10,7 +10,7 @@ import {
 
 const vehicleRouter = Router();
 
-// /api/users --> POST
+// /api/users --> POSTactives
 vehicleRouter.post('/', createVehicleHandler);
 
 // /api/users --> GET
