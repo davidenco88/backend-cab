@@ -6,7 +6,7 @@ import {
   updateUserHandler,
   deleteUserHandler,
   getAllUserInfoHandler,
-} from './users.controller'
+} from './users.controller';
 import {
   middlewareHasRol,
   middlewareRolAdmin,
@@ -18,16 +18,12 @@ const userRouter = Router();
 userRouter.post('/', middlewareHasRol, createUserHandler);
 
 // /api/users --> GET
-userRouter.get('/', getAllUserHandler);
-userRouter.get('/info', getAllUserInfoHandler);
+userRouter.get('/info', middlewareRolAdmin, getAllUserInfoHandler);
 userRouter.get('/', middlewareRolAdmin, getAllUserHandler);
 
 // /api/users/:id --> GET
 userRouter.get('/:id', middlewareHasRol, getUserByIdHandler);
 
-
-// /api/users --> PATHC
-userRouter.patch('/:id', updateUserHandler);
 // /api/users --> PATCH
 userRouter.patch('/:id', middlewareHasRol, updateUserHandler);
 
