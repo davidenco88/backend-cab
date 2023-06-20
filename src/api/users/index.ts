@@ -1,30 +1,31 @@
-import { Router } from "express";
+import { Router } from 'express';
 import {
   createUserHandler,
   getAllUserHandler,
   getUserByIdHandler,
   updateUserHandler,
   deleteUserHandler,
-} from './users.controller'
-import { middlewareHasRol, middlewareRolAdmin } from "../../auth/auth.controller";
+} from './users.controller';
+import {
+  middlewareHasRol,
+  middlewareRolAdmin,
+} from '../../auth/auth.controller';
 
 const userRouter = Router();
 
 // /api/users --> POST
-userRouter.post('/', createUserHandler);
+userRouter.post('/', middlewareHasRol, createUserHandler);
 
 // /api/users --> GET
-userRouter.get('/', middlewareRolAdmin , getAllUserHandler);
+userRouter.get('/', middlewareRolAdmin, getAllUserHandler);
 
 // /api/users/:id --> GET
-userRouter.get('/:id', middlewareHasRol , getUserByIdHandler);
+userRouter.get('/:id', middlewareHasRol, getUserByIdHandler);
 
 // /api/users --> PATCH
-userRouter.patch('/:id', middlewareHasRol , updateUserHandler);
+userRouter.patch('/:id', middlewareHasRol, updateUserHandler);
 
 // /api/users --> DELETE
-userRouter.patch('/delete/:id', middlewareRolAdmin , deleteUserHandler);
-
+userRouter.patch('/delete/:id', middlewareRolAdmin, deleteUserHandler);
 
 export default userRouter;
-
