@@ -42,7 +42,7 @@
     "morgan": "^1.10.0"
   },
   "prisma": {
-    "seed": "ts-node prisma/seed.ts"
+    "seed": "ts-node --transpile-only prisma/seed.ts"
   },
   "volta": {
     "node": "18.14.2",
