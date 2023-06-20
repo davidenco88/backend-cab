@@ -5,16 +5,18 @@ import {
   getVehicleByIdHandler,
   updateVehicleByIdHandler,
   deleteVehicleHandler,
+  getAllActiveVehicleHandler
 } from './vehicles.controller'
 
 const vehicleRouter = Router();
 
-// /api/users --> POST
+// /api/users --> POSTactives
 vehicleRouter.post('/', createVehicleHandler);
 
 // /api/users --> GET
 vehicleRouter.get('/', getAllVehicleHandler);
 
+vehicleRouter.get('/actives', getAllActiveVehicleHandler);
 // /api/users/:id --> GET
 vehicleRouter.get('/:id', getVehicleByIdHandler);
 

@@ -50,8 +50,8 @@ model DiscountCodes {
 
 model Vehicles {
   id            Int          @id @default(autoincrement())
-  Users         Users        @relation(fields: [dirverID], references: [id])
-  dirverID      Int
+  Users         Users        @relation(fields: [driverID], references: [id])
+  driverID      Int
   VehicleTypes  VehicleTypes @relation(fields: [vehicleTypeID], references: [id])
   vehicleTypeID Int
   name          String

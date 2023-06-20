@@ -5,6 +5,7 @@ import {
   getVehicleById,
   updateVehicle,
   deleteVehicle,
+  getAllVehiclesStatus
 } from './vehicles.service'
 
 export async function createVehicleHandler(
@@ -25,6 +26,10 @@ export async function createVehicleHandler(
 
 export async function getAllVehicleHandler(req: Request, res: Response) {
   const vehicles = await getAllVehicles();
+  return res.json(vehicles);
+}
+export async function getAllActiveVehicleHandler(req: Request, res: Response) {
+  const vehicles = await getAllVehiclesStatus();
   return res.json(vehicles);
 }
 

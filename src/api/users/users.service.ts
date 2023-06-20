@@ -97,11 +97,8 @@ export async function getUserByEmail(email: string) {
   return user;
 }
 
-export async function getUserWithRolesByEmail(email: string) {
-  const user = await prisma.users.findUnique({
-    where: {
-      email,
-    },
+export async function getAllUserWithRoles() {
+  const user = await prisma.users.findMany({
     include: {
       UserByRole: {
         select: {

@@ -18,8 +18,17 @@ export async function getAllVehicles() {
   return vehicles;
 }
 export async function getAllVehiclesStatus() {
-  const vehicles = await prisma.vehicles.findMany();
-  return vehicles;
+
+  const vehiclesByStatus = await prisma.vehicles.findMany({
+    include: {
+      VehicleTypes: {
+        include: {
+          ServiceType: true
+        }
+      }
+    }
+  })
+  return vehiclesByStatus;
 }
 export async function getVehicleById(id: number) {
   const vehicle = await prisma.vehicles.findUnique({

@@ -5,7 +5,7 @@ export type vehiclesCreateData = Vehicles;
 export type createVehicle = {
 
   id?: number;
-  dirverID: number;
+  driverID: number;
   vehicleTypeID: number;
   name: string;
   plates: string;

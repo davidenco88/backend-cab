@@ -5,7 +5,9 @@ import {
   getUserById,
   updateUser,
   deleteUser,
-} from './users.service';
+  getAllUserWithRoles
+} from './users.service'
+
 import { CreateUser } from './users.type';
 
 export async function createUserHandler(
@@ -36,6 +38,11 @@ export async function getAllUserHandler(req: Request, res: Response) {
   const users = await getAllUser();
   return res.json(users);
 }
+export async function getAllUserInfoHandler(req: Request, res: Response) {
+  const users = await getAllUserWithRoles();
+  return res.json(users);
+}
+
 
 export async function getUserByIdHandler(
   req: Request,
