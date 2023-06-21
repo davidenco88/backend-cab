@@ -28,13 +28,13 @@
     "eslint-plugin-n": "^15.7.0",
     "eslint-plugin-promise": "^6.1.1",
     "husky": "^8.0.3",
-    "prisma": "^4.15.0",
+    "prisma": "^4.16.0",
     "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.1.3"
   },
   "dependencies": {
-    "@prisma/client": "^4.15.0",
+    "@prisma/client": "^4.16.0",
     "bcrypt": "^5.1.0",
     "compose-middleware": "^5.0.1",
     "cors": "^2.8.5",
@@ -43,7 +43,7 @@
     "morgan": "^1.10.0"
   },
   "prisma": {
-    "seed": "ts-node prisma/seed.ts"
+    "seed": "ts-node --transpile-only prisma/seed.ts"
   },
   "volta": {
     "node": "18.14.2",
