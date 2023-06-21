@@ -38,5 +38,7 @@ export async function loginHandler(req: Request, res: Response) {
     };
 
     return res.json({ token, profile });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 }
