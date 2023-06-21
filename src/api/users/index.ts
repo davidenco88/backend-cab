@@ -24,6 +24,9 @@ userRouter.get('/', middlewareRolAdmin, getAllUserHandler);
 // /api/users/:id --> GET
 userRouter.get('/:id', middlewareHasRol, getUserByIdHandler);
 
+
+// /api/users --> PATHC
+userRouter.patch('/:id', updateUserHandler);
 // /api/users --> PATCH
 userRouter.patch('/:id', middlewareHasRol, updateUserHandler);
 

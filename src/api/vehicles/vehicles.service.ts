@@ -21,6 +21,7 @@ export async function getAllVehiclesStatus() {
 
   const vehiclesByStatus = await prisma.vehicles.findMany({
     include: {
+      Users:true,
       VehicleTypes: {
         include: {
           ServiceType: true
