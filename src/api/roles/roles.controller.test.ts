@@ -31,7 +31,7 @@ describe('Useres controller', () => {
 
       // Assert
       expect(res.status).toBe(statusCode);
-      //expect(res.body).toEqual(response);
+      expect(res.body).toEqual(response);
     });
   });
 });
