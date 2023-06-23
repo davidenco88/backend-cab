@@ -36,7 +36,7 @@ describe('Useres controller', () => {
   });
 });
 
-describe('Task getByID test', () => {
+describe('Roles getRolById test', () => {
   describe('GET /api/roles/:id', () => {
     test('should respond a 200 status code', async () => {
       // Arrange
@@ -59,9 +59,9 @@ describe('Task getByID test', () => {
       };
 
       // Act
-      const res = await request.get('/api/tasks/1');
-      const res2 = await request.get('/api/tasks/2');
-      const res3 = await request.get('/api/tasks/3');
+      const res  = await request.get('/api/roles/1');
+      const res2 = await request.get('/api/roles/2');
+      const res3 = await request.get('/api/roles/3');
       // Assert
       expect(res.status).toBe(statusCode);
       expect(res).not.toBeNull();
