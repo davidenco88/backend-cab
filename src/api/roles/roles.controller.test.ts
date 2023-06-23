@@ -36,6 +36,7 @@ describe('Useres controller', () => {
   });
 });
 
+
 describe('Roles getRolById test', () => {
   describe('GET /api/roles/:id', () => {
     test('should respond a 200 status code', async () => {
@@ -77,3 +78,4 @@ describe('Roles getRolById test', () => {
     });
   });
 });
+
