@@ -1,5 +1,5 @@
-import supertest from "supertest";
-import { app } from "../../app" ;
+import supertest from 'supertest';
+import app from '../../app';
 
 const request = supertest(app);
 
@@ -10,21 +10,21 @@ describe('Useres controller', () => {
       const statusCode = 200;
       const response = [
         {
-            "id": 1,
-            "name": "Admin",
-            "isActive": true
+          id: 1,
+          name: 'Admin',
+          isActive: true,
         },
         {
-            "id": 2,
-            "name": "Client",
-            "isActive": true
+          id: 2,
+          name: 'Client',
+          isActive: true,
         },
         {
-            "id": 3,
-            "name": "Driver",
-            "isActive": true
-        }
-    ];
+          id: 3,
+          name: 'Driver',
+          isActive: true,
+        },
+      ];
 
       // Act
       const res = await request.get('/api/roles');
