@@ -3,7 +3,7 @@ import configExpress from './config/express';
 import routes from './routes';
 import { createServer } from 'http';
 
-export const app = express();
+const app = express();
 
 export const server = createServer(app);
 
