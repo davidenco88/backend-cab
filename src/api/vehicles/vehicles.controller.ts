@@ -5,7 +5,7 @@ import {
   getVehicleById,
   updateVehicle,
   deleteVehicle,
-  getAllVehiclesStatus
+  getAllAvailableVehicles
 } from './vehicles.service'
 
 export async function createVehicleHandler(
@@ -28,9 +28,21 @@ export async function getAllVehicleHandler(req: Request, res: Response) {
   const vehicles = await getAllVehicles();
   return res.json(vehicles);
 }
-export async function getAllActiveVehicleHandler(req: Request, res: Response) {
-  const vehicles = await getAllVehiclesStatus();
+export async function getAllAvailableVehicleHandler(req: Request, res: Response, next: NextFunction) {
+
+  try {
+    const vehicles = await getAllAvailableVehicles();
+
+     if (vehicles.length === 0) {
+     return res.status(404).json({ message : 'There is no active vehicles, try again later'});
+    }
+
   return res.json(vehicles);
+  } catch (error) {
+    console.log(error);
+    return next(error);
+  }
+
 }
 
 export async function getVehicleByIdHandler(
