@@ -1,23 +1,23 @@
 import supertest from "supertest";
 import {getAllRol, getRolById} from "./roles.service"
-import { app } from "../../app" ;
+import  app  from "../../app" ;
 
 const request = supertest(app);
 
 describe('Task Service', () => {
   describe('getAllRol', () => {
-    test('should return an instance of array', () => {
+    test('should return an instance of array',async () => {
       // Arrange
       const expected = Array;
 
       // Act
-      const result = getAllRol();
+      const result = await getAllRol();
 
       // Assert
-      expect(result).toBeInstanceOf(expected);
+      expect((result)).toBeInstanceOf(expected);
     });
 
-    test('should return an array of tasks', () => {
+    test('should return an array of Roles',async () => {
       // Arrange
       const expected = [
         {
@@ -38,7 +38,7 @@ describe('Task Service', () => {
     ];
 
       // Act
-      const result = getAllRol();
+      const result = await getAllRol();
 
       // Assert
       expect(result).toEqual(expect.arrayContaining(expected));
@@ -55,7 +55,7 @@ describe('Task Service', () => {
   });
 
   describe('getRolById', () => {
-    test('should return and one task object', () => {
+    test('should return and one task object', async () => {
       // Arrange
       const taskId = 1;
       const expected = {
@@ -65,20 +65,20 @@ describe('Task Service', () => {
       };
 
       // Act
-      const result = getRolById(taskId);
+      const result =await getRolById(taskId);
 
       // Assert
       expect(result).not.toBeNull();
       expect(result).toEqual(expected);
     });
 
-    test('should return null if task is not found', () => {
+    test('should return null if task is not found',async () => {
       // Arrange
       const taskId = 999;
       const expected = null;
 
       // Act
-      const result = getRolById(taskId);
+      const result =await getRolById(taskId);
 
       // Assert
       expect(result).toBeNull();
