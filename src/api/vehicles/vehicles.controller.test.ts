@@ -82,7 +82,7 @@ describe('Vehicles controller /api/vehicles', () => {
   })
 
   describe('GET /actives' , () => {
-    test('Every vehicle return SHOULD have property isAvailable as true', async () => {
+    test('Every vehicle returned SHOULD have property isAvailable as true', async () => {
       //Arrange
       const status = 200;
       //Act
@@ -93,4 +93,18 @@ describe('Vehicles controller /api/vehicles', () => {
     });
   });
 
+  describe('PATCH as DELETE /delete/:id', () => {
+    test('should set vehicle isActive and isAvailable to false', async () => {
+      //Arrange
+      const id = 2;
+      const valuesExpected = {
+        isAvailable: false,
+        isActive: false
+      }
+      //Act
+      const response = await request.patch(`/api/vehicles/delete/${id}`);
+      //Assert
+      expect(response.body).toEqual(expect.objectContaining(valuesExpected));
+    });
+  });
 });

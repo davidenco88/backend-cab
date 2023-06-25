@@ -44,7 +44,7 @@ export async function getVehicleById(id: number) {
 }
 
 export async function deleteVehicle(id: number) {
-  const updateVehicle = await prisma.vehicles.update({
+  const deletedVehicle = await prisma.vehicles.update({
     where: {
       id,
     },
@@ -53,7 +53,7 @@ export async function deleteVehicle(id: number) {
       isAvailable: false,
     },
   })
-  return updateVehicle;
+  return deletedVehicle;
 }
 
 export async function updateVehicle(
