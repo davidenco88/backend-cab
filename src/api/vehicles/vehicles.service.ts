@@ -17,10 +17,14 @@ export async function getAllVehicles() {
   const vehicles = await prisma.vehicles.findMany();
   return vehicles;
 }
-export async function getAllVehiclesStatus() {
+export async function getAllAvailableVehicles() {
 
   const vehiclesByStatus = await prisma.vehicles.findMany({
+    where: {
+      isAvailable: true
+    },
     include: {
+      Users:true,
       VehicleTypes: {
         include: {
           ServiceType: true
@@ -40,15 +44,16 @@ export async function getVehicleById(id: number) {
 }
 
 export async function deleteVehicle(id: number) {
-  const updateVehicle = await prisma.vehicles.update({
+  const deletedVehicle = await prisma.vehicles.update({
     where: {
       id,
     },
     data: {
       isActive: false,
+      isAvailable: false,
     },
   })
-  return updateVehicle;
+  return deletedVehicle;
 }
 
 export async function updateVehicle(

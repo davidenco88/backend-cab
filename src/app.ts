@@ -1,10 +1,11 @@
-import express, { Express, Request, Response, NextFunction } from 'express';
+import express from 'express';
 import configExpress from './config/express';
 import routes from './routes';
+import { createServer } from 'http';
 
 const app = express();
 
-const PORT = process.env.PORT ?? 8080;
+export const server = createServer(app);
 
 //set up express
 configExpress(app);
@@ -12,6 +13,4 @@ configExpress(app);
 //Setup routes
 routes(app);
 
-app.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}`);
-});
+export default app;
