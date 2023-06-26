@@ -15,7 +15,7 @@ import {
 const userRouter = Router();
 
 // /api/users --> POST
-userRouter.post('/', middlewareHasRol, createUserHandler);
+userRouter.post('/', createUserHandler);
 
 // /api/users --> GET
 userRouter.get('/info', middlewareRolAdmin, getAllUserInfoHandler);
