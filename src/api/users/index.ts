@@ -18,18 +18,18 @@ const userRouter = Router();
 userRouter.post('/', createUserHandler);
 
 // /api/users --> GET
-userRouter.get('/info', middlewareRolAdmin, getAllUserInfoHandler);
-userRouter.get('/', middlewareRolAdmin, getAllUserHandler);
+userRouter.get('/info', getAllUserInfoHandler);
+userRouter.get('/', getAllUserHandler);
 
 // /api/users/:id --> GET
-userRouter.get('/:id', middlewareHasRol, getUserByIdHandler);
+userRouter.get('/:id', getUserByIdHandler);
 
 // /api/users --> PATHC
 userRouter.patch('/:id', updateUserHandler);
 // /api/users --> PATCH
-userRouter.patch('/:id', middlewareHasRol, updateUserHandler);
+userRouter.patch('/:id', updateUserHandler);
 
 // /api/users --> DELETE
-userRouter.patch('/delete/:id', middlewareRolAdmin, deleteUserHandler);
+userRouter.patch('/delete/:id', deleteUserHandler);
 
 export default userRouter;

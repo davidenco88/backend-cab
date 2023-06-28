@@ -11,16 +11,18 @@ datasource db {
 }
 
 model Users {
-  id            Int             @id @default(autoincrement())
-  name          String
-  lastname      String
-  email         String          @unique
-  avatar        String
-  isActive      Boolean         @default(false)
-  password      String
-  UserByRole    UserByRole[]
-  DiscountCodes DiscountCodes[]
-  Vehicles      Vehicles[]
+  id                   Int             @id @default(autoincrement())
+  name                 String
+  lastname             String
+  email                String          @unique
+  avatar               String
+  isActive             Boolean         @default(false)
+  password             String
+  passwordResetToken   String?         @unique
+  passwordResetExpires DateTime?
+  UserByRole           UserByRole[]
+  DiscountCodes        DiscountCodes[]
+  Vehicles             Vehicles[]
 }
 
 model Rol {
