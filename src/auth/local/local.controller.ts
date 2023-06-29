@@ -33,7 +33,7 @@ export async function loginHandler(req: Request, res: Response) {
     const token = signToken(payload);
 
     const profile = {
-      fullName: `${user.name} `,
+      fullName: `${user.name} ${user.lastname}`,
       avatar: user.avatar,
       roles: user.UserByRole.map(({ Rol }) => ({
         id: Rol.id,
@@ -75,10 +75,25 @@ export async function activateHandler(req: Request, res: Response) {
     };
 
     await updateUser(data.id, data);
-    return res.json({ message: 'User activated' });
+
+    // jwt
+    const payload = {
+      id: user.id,
+      email: user.email,
+    };
+    const loginToken = signToken(payload);
+
+    const profile = {
+      fullName: `${user.name} ${user.lastname}`,
+      avatar: user.avatar,
+      roles: user.UserByRole.map(({ Rol }) => ({
+        id: Rol.id,
+        name: Rol.name,
+      })),
+    };
+
+    return res.status(200).json({ loginToken, profile });
   } catch (error) {
     console.log(error);
   }
-
-  console.log(token);
 }

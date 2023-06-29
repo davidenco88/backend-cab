@@ -39,6 +39,7 @@ export async function createUserHandler(
       },
     };
 
+    console.log(dataMail);
     sendMailSendGrid(dataMail);
 
     return res.status(201).json(user);
