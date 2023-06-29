@@ -18,6 +18,10 @@ export async function loginHandler(req: Request, res: Response) {
       return res.status(404).json({ message: 'User not found' });
     }
 
+    if(!user.isActive) {
+      return res.status(401).json({ message: 'Account has not been activated or account has been deleted' });
+    }
+
     // compare password
     const isMatch = await comparePassword(password, user.password);
 
