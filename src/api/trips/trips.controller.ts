@@ -6,7 +6,8 @@ import {
   updateTrip,
   deleteTrip,
 } from './trips.service'
-
+import { sendMailSendGrid } from '../../auth/utils/validationMail';
+import { tripsCreateData } from './trips.type';
 export async function createTripHandler(
   req: Request,
   res: Response,
@@ -77,6 +78,42 @@ export async function updateTripByIdHandler(
   try {
     const trip = await updateTrip(integerId, data);
     return res.json(trip);
+  } catch (error) {
+    return next(error);
+  }
+}
+
+export async function createUserHandler(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  const data: tripsCreateData = req.body;
+
+  console.log(data);
+
+  if (Object.keys(data).length === 0) {
+    return res
+      .status(400)
+      .json({ message: 'Missing required information in the request body' });
+  }
+
+  try {
+
+    const dataMail = {
+      to: data.email,
+      from: 'CAB <david.sarriav@gmail.com>', // Use the email address or domain you verified above
+      subject: 'Welcome to the CAB App',
+      templateId: 'd-8ea90ba6b4304922b50570fcdc4aae31',
+      dynamicTemplateData: {
+        url,
+      },
+    };
+
+    console.log(dataMail);
+    sendMailSendGrid(dataMail);
+
+    return res.status(201).json(user);
   } catch (error) {
     return next(error);
   }
