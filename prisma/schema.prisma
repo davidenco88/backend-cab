@@ -76,14 +76,6 @@ model VehicleTypes {
   isActive    Boolean       @default(true)
 }
 
-model ServiceType {
-  id             Int          @id @default(autoincrement())
-  VehicleTypes   VehicleTypes @relation(fields: [vehicleTypesId], references: [id])
-  vehicleTypesId Int
-  feeBase        Int
-  isActive       Boolean      @default(true)
-}
-
 model Trips {
   id                Int            @id @default(autoincrement())
   pickUpLatitude    String
