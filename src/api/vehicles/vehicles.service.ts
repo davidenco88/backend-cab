@@ -3,7 +3,7 @@ import { vehiclesCreateData , createVehicle } from './vehicles.type';
 
 const prisma = new PrismaClient();
 
-export async function createVehicle(data: createVehicle
+export async function createVehicle(data: vehiclesCreateData
 ) {
   const vehicle = await prisma.vehicles.create({
     data
@@ -25,11 +25,7 @@ export async function getAllAvailableVehicles() {
     },
     include: {
       Users:true,
-      VehicleTypes: {
-        include: {
-          ServiceType: true
-        }
-      }
+      VehicleTypes:true,
     }
   })
   return vehiclesByStatus;
@@ -69,3 +65,4 @@ export async function updateVehicle(
   })
   return updatevehicle;
 }
+
