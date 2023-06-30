@@ -66,14 +66,13 @@ model Vehicles {
 }
 
 model VehicleTypes {
-  id          Int           @id @default(autoincrement())
-  Vehicles    Vehicles[]
-  name        String
-  seats       Int
-  luggage     String
-  feeBase     Int
-  ServiceType ServiceType[]
-  isActive    Boolean       @default(true)
+  id       Int        @id @default(autoincrement())
+  Vehicles Vehicles[]
+  name     String
+  seats    Int
+  luggage  String
+  feeBase  Int
+  isActive Boolean    @default(true)
 }
 
 model Trips {
