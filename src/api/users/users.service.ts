@@ -1,12 +1,14 @@
 import { PrismaClient } from '@prisma/client';
 import { CreateUser, updateUser } from './users.type';
-import { hashPassword } from '../../auth/utils/bcrypt';
+import { createHashToken, hashPassword } from '../../auth/utils/bcrypt';
 
 const prisma = new PrismaClient();
 
 export async function createUser(input: CreateUser) {
   //Add client in Users Table
   const hashedPassword = await hashPassword(input.password);
+  const hashPasswordResetToken = await createHashToken(input.email);
+  const passwordResetExpires = new Date(Date.now() + 3_600_000 * 24);
 
   const user = await prisma.users.create({
     data: {
@@ -15,6 +17,8 @@ export async function createUser(input: CreateUser) {
       email: input.email,
       avatar: input.avatar,
       password: hashedPassword,
+      passwordResetToken: hashPasswordResetToken,
+      passwordResetExpires: passwordResetExpires,
     },
   });
 
@@ -65,8 +69,6 @@ export async function deleteUser(id: number) {
 }
 
 export async function updateUser(id: number, data: updateUser) {
-  console.log(id);
-  console.log(data);
   const updateUser = await prisma.users.update({
     where: {
       id,
@@ -80,6 +82,27 @@ export async function getUserByEmail(email: string) {
   const user = await prisma.users.findUnique({
     where: {
       email,
+    },
+    include: {
+      UserByRole: {
+        select: {
+          Rol: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
+        },
+      },
+    },
+  });
+  return user;
+}
+
+export async function getUserByToken(passwordResetToken: string) {
+  const user = await prisma.users.findUnique({
+    where: {
+      passwordResetToken,
     },
     include: {
       UserByRole: {

@@ -31,8 +31,12 @@ export type UserWithRoles = {
 
 export type updateUser = {
   id: number;
-  name: string;
-  email: string;
-  avatar: string;
-  rol_id: number;
+  name?: string;
+  lastname?: string;
+  email?: string;
+  avatar?: string;
+  isActive?: boolean;
+  password?: string;
+  passwordResetToken?: string;
+  passwordResetExpires?: string;
 };

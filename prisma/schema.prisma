@@ -11,16 +11,18 @@ datasource db {
 }
 
 model Users {
-  id            Int             @id @default(autoincrement())
-  name          String
-  lastname      String
-  email         String          @unique
-  avatar        String
-  isActive      Boolean         @default(false)
-  password      String
-  UserByRole    UserByRole[]
-  DiscountCodes DiscountCodes[]
-  Vehicles      Vehicles[]
+  id                   Int             @id @default(autoincrement())
+  name                 String
+  lastname             String
+  email                String          @unique
+  avatar               String
+  isActive             Boolean         @default(false)
+  password             String
+  passwordResetToken   String?         @unique
+  passwordResetExpires DateTime?
+  UserByRole           UserByRole[]
+  DiscountCodes        DiscountCodes[]
+  Vehicles             Vehicles[]
 }
 
 model Rol {
@@ -54,28 +56,23 @@ model Vehicles {
   driverID      Int
   VehicleTypes  VehicleTypes @relation(fields: [vehicleTypeID], references: [id])
   vehicleTypeID Int
-  name          String
+  image         String
+  mark          String
+  line          String
+  model         Int
   plates        String
   isAvailable   Boolean      @default(true)
   isActive      Boolean      @default(true)
 }
 
 model VehicleTypes {
-  id          Int           @id @default(autoincrement())
-  Vehicles    Vehicles[]
-  name        String
-  seats       Int
-  luggage     String
-  ServiceType ServiceType[]
-  isActive    Boolean       @default(true)
-}
-
-model ServiceType {
-  id             Int          @id @default(autoincrement())
-  VehicleTypes   VehicleTypes @relation(fields: [vehicleTypesId], references: [id])
-  vehicleTypesId Int
-  feeBase        Int
-  isActive       Boolean      @default(true)
+  id       Int        @id @default(autoincrement())
+  Vehicles Vehicles[]
+  name     String
+  seats    Int
+  luggage  String
+  feeBase  Int
+  isActive Boolean    @default(true)
 }
 
 model Trips {

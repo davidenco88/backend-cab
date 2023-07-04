@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt';
+import crypto from 'crypto';
 
 /**
  * Hash password
@@ -16,4 +17,8 @@ export async function comparePassword(
   hashedPassword: string
 ) {
   return await bcrypt.compare(password, hashedPassword);
+}
+
+export async function createHashToken(data: string) {
+  return crypto.createHash('sha256').update(data).digest('hex');
 }

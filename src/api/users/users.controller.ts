@@ -5,10 +5,10 @@ import {
   getUserById,
   updateUser,
   deleteUser,
-  getAllUserWithRoles
-} from './users.service'
-
+  getAllUserWithRoles,
+} from './users.service';
 import { CreateUser } from './users.type';
+import { sendMailSendGrid } from '../../auth/utils/validationMail';
 
 export async function createUserHandler(
   req: Request,
@@ -28,6 +28,20 @@ export async function createUserHandler(
   try {
     const user = await createUser(data);
 
+    const url = `${process.env.FRONT_END_URL}/activate-account/${user.passwordResetToken}`;
+    const dataMail = {
+      to: data.email,
+      from: 'CAB <david.sarriav@gmail.com>', // Use the email address or domain you verified above
+      subject: 'Welcome to the CAB App',
+      templateId: 'd-8ea90ba6b4304922b50570fcdc4aae31',
+      dynamicTemplateData: {
+        url,
+      },
+    };
+
+    console.log(dataMail);
+    sendMailSendGrid(dataMail);
+
     return res.status(201).json(user);
   } catch (error) {
     return next(error);
@@ -38,11 +52,11 @@ export async function getAllUserHandler(req: Request, res: Response) {
   const users = await getAllUser();
   return res.json(users);
 }
+
 export async function getAllUserInfoHandler(req: Request, res: Response) {
   const users = await getAllUserWithRoles();
   return res.json(users);
 }
-
 
 export async function getUserByIdHandler(
   req: Request,
