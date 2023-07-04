@@ -7,7 +7,7 @@ import {
   deleteTrip,
 } from './trips.service'
 import { sendMailSendGrid } from '../../auth/utils/validationMail';
-import { tripsCreateData } from './trips.type';
+import { tripsCreateData , tripsEmailCreatedData} from './trips.type';
 export async function createTripHandler(
   req: Request,
   res: Response,
@@ -83,12 +83,12 @@ export async function updateTripByIdHandler(
   }
 }
 
-export async function createUserHandler(
+export async function createTripEmailHandler(
   req: Request,
   res: Response,
   next: NextFunction
 ) {
-  const data: tripsCreateData = req.body;
+  const data: tripsEmailCreatedData = req.body;
 
   console.log(data);
 
@@ -101,19 +101,17 @@ export async function createUserHandler(
   try {
 
     const dataMail = {
-      to: data.email,
+      to: data.toEmail,
       from: 'CAB <david.sarriav@gmail.com>', // Use the email address or domain you verified above
-      subject: 'Welcome to the CAB App',
+      subject: 'Travel schedulede',
       templateId: 'd-8ea90ba6b4304922b50570fcdc4aae31',
-      dynamicTemplateData: {
-        url,
-      },
+
     };
 
     console.log(dataMail);
     sendMailSendGrid(dataMail);
 
-    return res.status(201).json(user);
+    return res.status(200)
   } catch (error) {
     return next(error);
   }
