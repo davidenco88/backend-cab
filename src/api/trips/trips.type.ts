@@ -1,5 +1,5 @@
 import { Trips } from '@prisma/client';
-
+import sgMail from '@sendgrid/mail';
 export type tripsCreateData = Trips;
 
 export type tripsEmailCreatedData ={

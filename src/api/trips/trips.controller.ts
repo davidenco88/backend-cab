@@ -6,6 +6,7 @@ import {
   updateTrip,
   deleteTrip,
 } from './trips.service'
+import sgMail from '@sendgrid/mail';
 import { sendMailSendGrid } from '../../auth/utils/validationMail';
 import { tripsCreateData , tripsEmailCreatedData} from './trips.type';
 export async function createTripHandler(
@@ -89,7 +90,6 @@ export async function createTripEmailHandler(
   next: NextFunction
 ) {
   const data: tripsEmailCreatedData = req.body;
-
   console.log(data);
 
   if (Object.keys(data).length === 0) {
@@ -101,10 +101,11 @@ export async function createTripEmailHandler(
   try {
 
     const dataMail = {
-      to: data.toEmail,
+      to: String(data.toEmail),
       from: 'CAB <david.sarriav@gmail.com>', // Use the email address or domain you verified above
-      subject: 'Travel schedulede',
-      templateId: 'd-8ea90ba6b4304922b50570fcdc4aae31',
+      subject: 'Sending with SendGrid is Fun',
+      text: 'and easy to do anywhere, even with Node.js',
+      html: '<strong>and easy to do anywhere, even with Node.js</strong>',
 
     };
 
