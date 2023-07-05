@@ -98,14 +98,18 @@ export async function createTripEmailHandler(
   }
 
   try {
-
+    const url = `${process.env.FRONT_END_URL}/driver-travels/`;
     const dataMail = {
       to: String(data.toEmail),
       from: 'CAB <david.sarriav@gmail.com>', // Use the email address or domain you verified above
       subject: 'Sending with SendGrid is Fun',
-      text: 'and easy to do anywhere, even with Node.js',
-      html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+      templateId: 'd-0cad497e97f0412fb7bdba7cde87e8e8',
+      dynamicTemplateData: {
+        url,
+      },
     };
+
+
 
     sendMailSendGrid(dataMail);
 
