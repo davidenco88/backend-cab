@@ -102,7 +102,7 @@ export async function createTripEmailHandler(
     const dataMail = {
       to: String(data.toEmail),
       from: 'CAB <david.sarriav@gmail.com>', // Use the email address or domain you verified above
-      subject: 'Sending with SendGrid is Fun',
+      subject: 'New trip scheduled from RICA CAB',
       templateId: 'd-0cad497e97f0412fb7bdba7cde87e8e8',
       dynamicTemplateData: {
         url,
