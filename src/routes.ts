@@ -13,7 +13,6 @@ import vehicleRouter from './api/vehicles';
 import vehicleTypeRouter from './api/vehicleTypes';
 import tripStateRouter from './api/tripStates';
 import tripRouter from './api/trips';
-import serviceTypeRouter from './api/serviceTypes';
 import authLocalRouter from './auth/local';
 
 function routes(app: Application) {
@@ -25,7 +24,6 @@ function routes(app: Application) {
   app.use('/api/vehicleTypes', vehicleTypeRouter);
   app.use('/api/tripStates', tripStateRouter);
   app.use('/api/trips', tripRouter);
-  app.use('/api/serviceTypes', serviceTypeRouter);
 
   // Auth
   app.use('/auth/local', authLocalRouter);
