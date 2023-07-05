@@ -21,7 +21,14 @@ export async function getAllAvailableVehicles() {
       isAvailable: true,
     },
     include: {
-      Users: true,
+      Users: {
+        select: {
+          id: true,
+          name: true,
+          lastname: true,
+          avatar: true,
+        }
+      },
       VehicleTypes: true,
     },
   });
