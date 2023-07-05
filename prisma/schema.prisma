@@ -57,9 +57,9 @@ model Vehicles {
   VehicleTypes  VehicleTypes @relation(fields: [vehicleTypeID], references: [id])
   vehicleTypeID Int
   image         String
-  mark          String
-  line          String
-  model         Int
+  brand         String
+  model         String
+  year          Int
   plates        String
   isAvailable   Boolean      @default(true)
   isActive      Boolean      @default(true)
@@ -68,7 +68,7 @@ model Vehicles {
 model VehicleTypes {
   id       Int        @id @default(autoincrement())
   Vehicles Vehicles[]
-  name     String
+  type     String
   seats    Int
   luggage  String
   feeBase  Int

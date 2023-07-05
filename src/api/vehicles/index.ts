@@ -16,7 +16,7 @@ vehicleRouter.post('/', createVehicleHandler);
 // /api/users --> GET
 vehicleRouter.get('/', getAllVehicleHandler);
 
-vehicleRouter.get('/actives', getAllAvailableVehicleHandler);
+vehicleRouter.get('/availables', getAllAvailableVehicleHandler);
 // /api/users/:id --> GET
 vehicleRouter.get('/:id', getVehicleByIdHandler);
 
