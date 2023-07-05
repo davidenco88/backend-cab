@@ -5,7 +5,7 @@ import {
   getTripByIdHandler,
   updateTripByIdHandler,
   deleteTripHandler,
-  createTripEmailHandler
+  createTripEmailHandler,
 
 } from './trips.controller'
 

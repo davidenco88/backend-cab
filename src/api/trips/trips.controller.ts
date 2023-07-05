@@ -8,7 +8,7 @@ import {
 } from './trips.service'
 import sgMail from '@sendgrid/mail';
 import { sendMailSendGrid } from '../../auth/utils/validationMail';
-import { tripsCreateData , tripsEmailCreatedData} from './trips.type';
+import { tripsCreateData, tripsEmailCreatedData } from './trips.type';
 export async function createTripHandler(
   req: Request,
   res: Response,
@@ -39,7 +39,7 @@ export async function getTripByIdHandler(
   const integerId = Number(id);
 
   try {
-     const trip = await getTripById(integerId);
+    const trip = await getTripById(integerId);
 
     if (!trip) {
       return res.status(404).json({ message: 'trip not found' });
@@ -90,7 +90,6 @@ export async function createTripEmailHandler(
   next: NextFunction
 ) {
   const data: tripsEmailCreatedData = req.body;
-  console.log(data);
 
   if (Object.keys(data).length === 0) {
     return res
@@ -106,13 +105,11 @@ export async function createTripEmailHandler(
       subject: 'Sending with SendGrid is Fun',
       text: 'and easy to do anywhere, even with Node.js',
       html: '<strong>and easy to do anywhere, even with Node.js</strong>',
-
     };
 
-    console.log(dataMail);
     sendMailSendGrid(dataMail);
 
-    return res.status(200)
+    return res.status(200).json(dataMail);
   } catch (error) {
     return next(error);
   }
