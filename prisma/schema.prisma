@@ -23,6 +23,7 @@ model Users {
   UserByRole           UserByRole[]
   DiscountCodes        DiscountCodes[]
   Vehicles             Vehicles[]
+  Trips                Trips[]
 }
 
 model Rol {
@@ -63,6 +64,7 @@ model Vehicles {
   plates        String
   isAvailable   Boolean      @default(true)
   isActive      Boolean      @default(true)
+  Trips         Trips[]
 }
 
 model VehicleTypes {
@@ -81,6 +83,10 @@ model Trips {
   pickUpLongitude   String
   dropDownLatitude  String
   dropDownLongitude String
+  Users             Users          @relation(fields: [clientID], references: [id])
+  clientID          Int
+  Vehicles          Vehicles       @relation(fields: [vehicleID], references: [id])
+  vehicleID         Int
   travelledDistance Int
   totalPrice        Int
   pickUpDate        DateTime

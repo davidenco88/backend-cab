@@ -6,7 +6,9 @@ import {
   updateTrip,
   deleteTrip,
 } from './trips.service'
-
+import sgMail from '@sendgrid/mail';
+import { sendMailSendGrid } from '../../auth/utils/validationMail';
+import { tripsCreateData, tripsEmailCreatedData } from './trips.type';
 export async function createTripHandler(
   req: Request,
   res: Response,
@@ -37,7 +39,7 @@ export async function getTripByIdHandler(
   const integerId = Number(id);
 
   try {
-     const trip = await getTripById(integerId);
+    const trip = await getTripById(integerId);
 
     if (!trip) {
       return res.status(404).json({ message: 'trip not found' });
@@ -77,6 +79,41 @@ export async function updateTripByIdHandler(
   try {
     const trip = await updateTrip(integerId, data);
     return res.json(trip);
+  } catch (error) {
+    return next(error);
+  }
+}
+
+export async function createTripEmailHandler(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  const data: tripsEmailCreatedData = req.body;
+
+  if (Object.keys(data).length === 0) {
+    return res
+      .status(400)
+      .json({ message: 'Missing required information in the request body' });
+  }
+
+  try {
+    const url = `${process.env.FRONT_END_URL}/driver-travels/`;
+    const dataMail = {
+      to: String(data.toEmail),
+      from: 'CAB <david.sarriav@gmail.com>', // Use the email address or domain you verified above
+      subject: 'New trip scheduled from RICA CAB',
+      templateId: 'd-0cad497e97f0412fb7bdba7cde87e8e8',
+      dynamicTemplateData: {
+        url,
+      },
+    };
+
+
+
+    sendMailSendGrid(dataMail);
+
+    return res.status(200).json(dataMail);
   } catch (error) {
     return next(error);
   }
