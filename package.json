@@ -47,7 +47,8 @@
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "stripe": "^12.11.0"
   },
   "prisma": {
     "seed": "ts-node --transpile-only prisma/seed.ts"
