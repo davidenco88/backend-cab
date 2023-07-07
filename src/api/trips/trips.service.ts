@@ -1,12 +1,12 @@
 import { PrismaClient } from "@prisma/client";
-import { tripsCreateData } from './trips.type';
+import { tripsCreateData, CreateTripTypeCalculated } from './trips.type';
 
 const prisma = new PrismaClient();
 
-export async function createTrip(data: tripsCreateData
+export async function createTrip(data: CreateTripTypeCalculated
 ) {
   const trip = await prisma.trips.create({
-    data
+    data,
   })
 
   return trip;

@@ -8,13 +8,54 @@ import {
 } from './trips.service'
 import sgMail from '@sendgrid/mail';
 import { sendMailSendGrid } from '../../auth/utils/validationMail';
-import { tripsCreateData, tripsEmailCreatedData } from './trips.type';
+import { CreateTripType, tripsEmailCreatedData, CreateTripTypeCalculated } from './trips.type';
+
 export async function createTripHandler(
   req: Request,
   res: Response,
   next: NextFunction
 ) {
-  const data = req.body;
+  const rawData: CreateTripType = req.body;
+
+  // DISTANCE CALCULATION
+  function calculateDistance(lat1: number, lon1: number, lat2: number, lon2: number) {
+    const radians = Math.PI / 180;
+    const dLat = (lat2 - lat1) * radians;
+    const dLon = (lon2 - lon1) * radians;
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(lat1 * radians) *
+        Math.cos(lat2 * radians) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const calculatedDistance = 6371 * c; // Radio de la Tierra en kilómetros
+
+    return calculatedDistance;
+  }
+  const lat1 = parseFloat(rawData.pickUpLatitude);
+  const lon1 = parseFloat(rawData.pickUpLongitude);
+  const lat2 = parseFloat(rawData.dropOffLatitude);
+  const lon2 = parseFloat(rawData.dropOffLongitude);
+  //distance se entrega en KM
+  const distance = calculateDistance(lat1, lon1, lat2, lon2);
+
+  // totalPrice CALCULATION
+  const calculatedPrice = rawData.selectedVehicle.VehicleTypes.feeBase * distance;
+
+
+  const data: CreateTripTypeCalculated = {
+    pickUpLatitude: rawData.pickUpLatitude,
+    pickUpLongitude: rawData.pickUpLongitude,
+    dropOffLatitude: rawData.dropOffLatitude,
+    dropOffLongitude: rawData.dropOffLongitude,
+    clientID: 2,
+    vehicleID: rawData.selectedVehicle.id,
+    travelDistance: distance,
+    totalPrice: calculatedPrice,
+    pickUpDate: new Date(rawData.pickUpDate),
+    isActive: true,
+}
 
   try {
     const trip = await createTrip(data);
