@@ -81,14 +81,14 @@ model Trips {
   id                Int            @id @default(autoincrement())
   pickUpLatitude    String
   pickUpLongitude   String
-  dropDownLatitude  String
-  dropDownLongitude String
+  dropOffLatitude   String
+  dropOffLongitude  String
   Users             Users          @relation(fields: [clientID], references: [id])
   clientID          Int
   Vehicles          Vehicles       @relation(fields: [vehicleID], references: [id])
   vehicleID         Int
-  travelledDistance Int
-  totalPrice        Int
+  travelDistance    Float
+  totalPrice        Float
   pickUpDate        DateTime
   DiscountCodes     DiscountCodes? @relation(fields: [discountCodeId], references: [id])
   discountCodeId    Int?
