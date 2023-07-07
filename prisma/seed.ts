@@ -68,7 +68,7 @@ async function main() {
   await prisma.tripState.createMany({
     data: [
       { name: "Scheduled",  isActive: true  },
-      { name: "Strated",    isActive: true },
+      { name: "Started",    isActive: true },
       { name: "Finished",  isActive: true },
       { name: "Canceled",  isActive: true },
     ],
