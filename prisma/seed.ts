@@ -65,6 +65,15 @@ async function main() {
     ],
     skipDuplicates: true,
   });
+  await prisma.tripState.createMany({
+    data: [
+      { name: "Scheduled",  isActive: true  },
+      { name: "Strated",    isActive: true },
+      { name: "Finished",  isActive: true },
+      { name: "Canceled",  isActive: true },
+    ],
+    skipDuplicates: true,
+  });
 
   await prisma.vehicles.createMany({
     data: [

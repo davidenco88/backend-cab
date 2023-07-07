@@ -49,6 +49,8 @@ export async function createTripHandler(
     pickUpLongitude: rawData.pickUpLongitude,
     dropOffLatitude: rawData.dropOffLatitude,
     dropOffLongitude: rawData.dropOffLongitude,
+    pickUpAddress: rawData.pickUpAddress,
+    dropOffAddress: rawData.dropOffAddress,
     clientID: 2,
     vehicleID: rawData.selectedVehicle.id,
     travelDistance: distance,
