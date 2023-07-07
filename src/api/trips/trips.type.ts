@@ -40,6 +40,8 @@ export type CreateTripType = {
   pickUpLongitude:   string;
   dropOffLatitude:  string;
   dropOffLongitude: string;
+  pickUpAddress:    string;
+  dropOffAddress:   string;
   pickUpDate: string;
   selectedVehicle:  SelectedVehicle;
 }
@@ -50,6 +52,8 @@ export type CreateTripTypeCalculated = {
   pickUpLongitude: string;
   dropOffLatitude: string;
   dropOffLongitude: string;
+  pickUpAddress:    string;
+  dropOffAddress:   string;
   clientID: number;
   vehicleID: number;
   travelDistance: number;
