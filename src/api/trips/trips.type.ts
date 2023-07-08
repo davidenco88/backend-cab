@@ -17,6 +17,7 @@ type User = {
   name: string;
   lastname: string;
   avatar: string;
+  email: string;
 }
 type VehicleType = VehicleTypes;
 type SelectedVehicle = {
