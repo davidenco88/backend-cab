@@ -44,6 +44,7 @@ export type CreateTripType = {
   pickUpAddress:    string;
   dropOffAddress:   string;
   pickUpDate: string;
+  clientID: number;
   selectedVehicle:  SelectedVehicle;
 }
 

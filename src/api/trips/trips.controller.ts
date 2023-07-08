@@ -51,7 +51,7 @@ export async function createTripHandler(
     dropOffLongitude: rawData.dropOffLongitude,
     pickUpAddress: rawData.pickUpAddress,
     dropOffAddress: rawData.dropOffAddress,
-    clientID: 2,
+    clientID: rawData.clientID,
     vehicleID: rawData.selectedVehicle.id,
     travelDistance: distance,
     totalPrice: calculatedPrice,
@@ -62,7 +62,7 @@ export async function createTripHandler(
   try {
     const trip = await createTrip(data);
 
-    return res.json(trip);
+    return res.status(201).json(trip);
   } catch (error) {
     return next(error);
   }
