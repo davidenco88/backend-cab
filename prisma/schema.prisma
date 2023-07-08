@@ -79,24 +79,24 @@ model VehicleTypes {
 
 model Trips {
   id               Int            @id @default(autoincrement())
-  pickUpLatitude   String
-  pickUpLongitude  String
-  dropOffLatitude  String
-  dropOffLongitude String
-  pickUpAddress    String
-  dropOffAddress   String
-  Users            Users          @relation(fields: [clientID], references: [id])
-  clientID         Int
-  Vehicles         Vehicles       @relation(fields: [vehicleID], references: [id])
-  vehicleID        Int
-  travelDistance   Float
-  totalPrice       Float
-  pickUpDate       DateTime
+  pickUpLatitude   String?
+  pickUpLongitude  String?
+  dropOffLatitude  String?
+  dropOffLongitude String?
+  pickUpAddress    String?
+  dropOffAddress   String?
+  Users            Users?         @relation(fields: [clientID], references: [id])
+  clientID         Int?
+  Vehicles         Vehicles?      @relation(fields: [vehicleID], references: [id])
+  vehicleID        Int?
+  travelDistance   Float?
+  totalPrice       Float?
+  pickUpDate       DateTime?
   DiscountCodes    DiscountCodes? @relation(fields: [discountCodeId], references: [id])
   discountCodeId   Int?
   TripState        TripState?     @relation(fields: [tripStateId], references: [id])
   tripStateId      Int?
-  isActive         Boolean        @default(true)
+  isActive         Boolean?       @default(true)
 }
 
 model TripState {

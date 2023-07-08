@@ -5,6 +5,7 @@ import {
   getTripById,
   updateTrip,
   deleteTrip,
+  updateTripStatus,
 } from './trips.service'
 import sgMail from '@sendgrid/mail';
 import { sendMailSendGrid } from '../../auth/utils/validationMail';
@@ -152,10 +153,9 @@ export async function createTripEmailHandler(
       },
     };
 
-
-
+    const integerId = Number(data.id);
     sendMailSendGrid(dataMail);
-
+    const trip = await updateTripStatus(integerId);
     return res.status(200).json(dataMail);
   } catch (error) {
     return next(error);

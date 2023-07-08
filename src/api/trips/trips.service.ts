@@ -52,3 +52,18 @@ export async function updateTrip(
   })
   return updatetrip;
 }
+export async function updateTripStatus(
+  id: number,
+  ) {
+
+  const updatetrip = await prisma.trips.update({
+    where: {
+      id,
+    },
+    data:{
+      tripStateId:1,
+      isActive: true,
+    }
+  })
+  return updatetrip;
+}
