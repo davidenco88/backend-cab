@@ -27,6 +27,7 @@ export async function getAllAvailableVehicles() {
           name: true,
           lastname: true,
           avatar: true,
+          email: true,
         }
       },
       VehicleTypes: true,
