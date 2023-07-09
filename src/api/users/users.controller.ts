@@ -6,6 +6,7 @@ import {
   updateUser,
   deleteUser,
   getAllUserWithRoles,
+  updateUserAvatar
 } from './users.service';
 import { CreateUser } from './users.type';
 import { sendMailSendGrid } from '../../auth/utils/validationMail';
@@ -110,3 +111,23 @@ export async function updateUserHandler(
     return next(error);
   }
 }
+
+export async function updateUserAvatarHandler(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  const { id } = req.params;
+  const integerId = Number(id);
+  const data = req.body;
+  console.log(data);
+  const file = req.file;
+  console.log("🚀 ~ file: users.controller.ts:107 ~ files:", file)
+  try {
+    const user = await updateUserAvatar(integerId, data);
+    return res.json(user);
+  } catch (error) {
+    return next(error);
+  }
+}
+

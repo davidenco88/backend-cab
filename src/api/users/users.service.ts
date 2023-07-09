@@ -138,3 +138,13 @@ export async function getAllUserWithRoles() {
 
   return user;
 }
+
+export async function updateUserAvatar(id: number, data: updateUser) {
+  const updateUser = await prisma.users.update({
+    where: {
+      id,
+    },
+    data,
+  });
+  return updateUser;
+}
