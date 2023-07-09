@@ -1,4 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
+import fs from 'fs';
+const cloudinary = require('cloudinary').v2;
+require('dotenv').config();
 import {
   createUser,
   getAllUser,
@@ -123,6 +126,27 @@ export async function updateUserAvatarHandler(
   console.log(data);
   const file = req.file;
   console.log("🚀 ~ file: users.controller.ts:107 ~ files:", file)
+
+  cloudinary.config({
+    cloud_name: 'dltibnft3',
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+  });
+
+  if (req.file && file) {
+    const result = await cloudinary.uploader.upload(file.path, {
+      folder: 'profile-images',
+      use_filename: true,
+      unique_filename: true,
+      width: 400,
+      height: 400,
+      gravity: 'faces',
+      crop: 'thumb',
+      zoom: 0.8,
+    })
+    console.log("🚀 ~ file: users.controller.ts:138 ~ result:", result)
+    fs.unlinkSync(req.file.path);
+  }
   try {
     const user = await updateUserAvatar(integerId, data);
     return res.json(user);
