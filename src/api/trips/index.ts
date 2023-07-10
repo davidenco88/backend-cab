@@ -6,6 +6,8 @@ import {
   updateTripByIdHandler,
   deleteTripHandler,
   createTripEmailHandler,
+  getAlltripsTripByClientIdHandler,
+  getAlltripsTripByDriverIdHandler
 
 } from './trips.controller'
 
@@ -20,6 +22,9 @@ tripRouter.get('/', getAllTripHandler);
 
 // /api/users/:id --> GET
 tripRouter.get('/:id', getTripByIdHandler);
+
+tripRouter.get('/TripsByClient/:id', getAlltripsTripByClientIdHandler);
+tripRouter.get('/TripsByDriver/:id', getAlltripsTripByDriverIdHandler);
 
 // /api/users --> PATHC
 tripRouter.patch('/:id', updateTripByIdHandler);

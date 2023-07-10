@@ -6,6 +6,8 @@ import {
   updateTrip,
   deleteTrip,
   updateTripStatus,
+  getTripInfoByClientId,
+  getTripInfoByDriverId,
 } from './trips.service'
 import sgMail from '@sendgrid/mail';
 import { sendMailSendGrid } from '../../auth/utils/validationMail';
@@ -157,6 +159,40 @@ export async function createTripEmailHandler(
     sendMailSendGrid(dataMail);
     const trip = await updateTripStatus(integerId);
     return res.status(200).json(dataMail);
+  } catch (error) {
+    return next(error);
+  }
+}
+
+export async function getAlltripsTripByDriverIdHandler(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  const { id } = req.body;
+  const integerId = Number(id);
+
+
+  try {
+    const trip = await getTripInfoByDriverId(integerId);
+    return res.json(trip);
+  } catch (error) {
+    return next(error);
+  }
+}
+
+export async function getAlltripsTripByClientIdHandler(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  const { id } = req.body;
+  const integerId = Number(id);
+
+
+  try {
+    const trip = await getTripInfoByClientId(integerId);
+    return res.json(trip);
   } catch (error) {
     return next(error);
   }
