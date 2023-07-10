@@ -89,9 +89,20 @@ export async function getTripInfoByClientId(id: number) {
       clientID: id,
     },
     include: {
-      Vehicles: true,
+      Vehicles: {
+        include: {
+          Users: {
+            select: {
+              id: true,
+              name: true,
+              lastname: true,
+              avatar: true,
+              email: true,
+            }
+          },
+        },
+      },
     },
   });
-
   return trips;
 }
