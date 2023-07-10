@@ -126,8 +126,6 @@ export async function updateUserAvatarHandler(
   let data = {};
   const maxSize  = 1024 * 1024 * 2;
 
-
-
   cloudinary.config({
     cloud_name: 'dltibnft3',
     api_key: process.env.CLOUDINARY_API_KEY,
@@ -162,7 +160,18 @@ export async function updateUserAvatarHandler(
 
   try {
     const user = await updateUserAvatar(integerId, data);
-    return res.json(user);
+    const profile = {
+      id: user.id,
+      fullName: `${user.name} ${user.lastname}`,
+      avatar: user.avatar,
+      email: user.email,
+      roles: user.UserByRole.map(({ Rol }) => ({
+        id: Rol.id,
+        name: Rol.name,
+      })),
+    };
+
+    return res.status(200).json(profile);
   } catch (error) {
     return res.status(500).json(error);
   }
