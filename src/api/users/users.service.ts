@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { CreateUser, updateUser } from './users.type';
+import { CreateUser, updateUser, updateUserAvatar } from './users.type';
 import { createHashToken, hashPassword } from '../../auth/utils/bcrypt';
 
 const prisma = new PrismaClient();
@@ -139,12 +139,24 @@ export async function getAllUserWithRoles() {
   return user;
 }
 
-export async function updateUserAvatar(id: number, data: updateUser) {
+export async function updateUserAvatar(id: number, data: updateUserAvatar) {
   const updateUser = await prisma.users.update({
     where: {
       id,
     },
     data,
+    include: {
+      UserByRole: {
+        select: {
+          Rol: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
+        },
+      },
+    },
   });
   return updateUser;
 }

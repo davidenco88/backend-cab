@@ -39,3 +39,11 @@ export type updateUser = {
   passwordResetToken?: string;
   passwordResetExpires?: string;
 };
+
+export type updateUserAvatar = {
+  id?: number;
+  name?: string;
+  lastname?: string;
+  email?: string;
+  avatar?: string;
+};
