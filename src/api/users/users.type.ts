@@ -30,7 +30,6 @@ export type UserWithRoles = {
 };
 
 export type updateUser = {
-  id: number;
   name?: string;
   lastname?: string;
   email?: string;

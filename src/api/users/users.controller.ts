@@ -122,10 +122,11 @@ export async function updateUserAvatarHandler(
 ) {
   const { id } = req.params;
   const integerId = Number(id);
-  const data = req.body;
-  console.log(data);
   const file = req.file;
-  console.log("🚀 ~ file: users.controller.ts:107 ~ files:", file)
+  let data = {};
+  const maxSize  = 1024 * 1024 * 2;
+
+
 
   cloudinary.config({
     cloud_name: 'dltibnft3',
@@ -134,24 +135,36 @@ export async function updateUserAvatarHandler(
   });
 
   if (req.file && file) {
-    const result = await cloudinary.uploader.upload(file.path, {
-      folder: 'profile-images',
-      use_filename: true,
-      unique_filename: true,
-      width: 400,
-      height: 400,
-      gravity: 'faces',
-      crop: 'thumb',
-      zoom: 0.8,
-    })
-    console.log("🚀 ~ file: users.controller.ts:138 ~ result:", result)
-    fs.unlinkSync(req.file.path);
+    if (file.size > maxSize) {
+      fs.unlinkSync(req.file.path);
+      return res.status(400).json({ message: 'File exceeds 5mb limit' });
+    }
+
+    try {
+      const result = await cloudinary.uploader.upload(file.path, {
+        folder: 'profile-images',
+        use_filename: true,
+        unique_filename: true,
+        width: 400,
+        height: 400,
+        gravity: 'faces',
+        crop: 'thumb',
+        zoom: 0.8,
+      })
+
+      data = { avatar: result.url };
+      fs.unlinkSync(req.file.path);
+
+    } catch (error) {
+      return res.status(500).json(error);
+    }
   }
+
   try {
     const user = await updateUserAvatar(integerId, data);
     return res.json(user);
   } catch (error) {
-    return next(error);
+    return res.status(500).json(error);
   }
 }
 
