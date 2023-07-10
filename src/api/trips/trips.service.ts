@@ -93,7 +93,6 @@ export async function getTripInfoByClientId(id: number) {
         include: {
           Users: {
             select: {
-              id: true,
               name: true,
               lastname: true,
               avatar: true,
