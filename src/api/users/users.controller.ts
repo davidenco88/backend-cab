@@ -1,4 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
+import fs from 'fs';
+const cloudinary = require('cloudinary').v2;
+require('dotenv').config();
 import {
   createUser,
   getAllUser,
@@ -6,6 +9,7 @@ import {
   updateUser,
   deleteUser,
   getAllUserWithRoles,
+  updateUserAvatar
 } from './users.service';
 import { CreateUser } from './users.type';
 import { sendMailSendGrid } from '../../auth/utils/validationMail';
@@ -110,3 +114,66 @@ export async function updateUserHandler(
     return next(error);
   }
 }
+
+export async function updateUserAvatarHandler(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  const { id } = req.params;
+  const integerId = Number(id);
+  const file = req.file;
+  let data = {};
+  const maxSize  = 1024 * 1024 * 2;
+
+  cloudinary.config({
+    cloud_name: 'dltibnft3',
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+  });
+
+  if (req.file && file) {
+    if (file.size > maxSize) {
+      fs.unlinkSync(req.file.path);
+      return res.status(400).json({ message: 'File exceeds 5mb limit' });
+    }
+
+    try {
+      const result = await cloudinary.uploader.upload(file.path, {
+        folder: 'profile-images',
+        use_filename: true,
+        unique_filename: true,
+        width: 400,
+        height: 400,
+        gravity: 'faces',
+        crop: 'thumb',
+        zoom: 0.8,
+      })
+
+      data = { avatar: result.url };
+      fs.unlinkSync(req.file.path);
+
+    } catch (error) {
+      return res.status(500).json(error);
+    }
+  }
+
+  try {
+    const user = await updateUserAvatar(integerId, data);
+    const profile = {
+      id: user.id,
+      fullName: `${user.name} ${user.lastname}`,
+      avatar: user.avatar,
+      email: user.email,
+      roles: user.UserByRole.map(({ Rol }) => ({
+        id: Rol.id,
+        name: Rol.name,
+      })),
+    };
+
+    return res.status(200).json(profile);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+}
+

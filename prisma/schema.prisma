@@ -15,7 +15,7 @@ model Users {
   name                 String
   lastname             String
   email                String          @unique
-  avatar               String
+  avatar               String          @default("https://url.zip/806f91e")
   isActive             Boolean         @default(false)
   password             String
   passwordResetToken   String?         @unique
