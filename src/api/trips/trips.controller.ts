@@ -9,6 +9,9 @@ import {
   getTripInfoByClientId,
   getTripInfoByDriverId,
 } from './trips.service'
+import { getUserById } from '../users/users.service';
+import { getVehicleById } from '../vehicles/vehicles.service';
+import { Users, Vehicles } from '@prisma/client';
 import { sendMailSendGrid } from '../../auth/utils/validationMail';
 import { CreateTripType, tripsEmailCreatedData, CreateTripTypeCalculated } from './trips.type';
 import { Trips } from '@prisma/client';
@@ -143,11 +146,14 @@ export async function createTripEmailHandler(
       .json({ message: 'Missing required information in the request body' });
   }
 
+  const vehicle = await getVehicleById(trip.vehicleID as number) as Vehicles;
+  const driver = await getUserById(vehicle.driverID as number) as Users;
+
   try {
     const url = `${process.env.FRONT_END_URL}/driver-travels/`;
     const dataMail = {
       // Descomentar esta línea para implementar en producción
-      // to: String(trip.selectedVehicle.Users.email),
+      // to: String(driver.email),
       // La linea abajo solo debe funcionar para etapa de pruebas
       to: 'david.sarria@correounivalle.edu.co',
       from: 'CAB <david.sarriav@gmail.com>', // Use the email address or domain you verified above
