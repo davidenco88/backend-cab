@@ -178,7 +178,7 @@ export async function getAlltripsTripByDriverIdHandler(
   res: Response,
   next: NextFunction
 ) {
-  const { id } = req.body;
+  const { id } = req.params;
   const integerId = Number(id);
 
 
@@ -195,7 +195,7 @@ export async function getAlltripsTripByClientIdHandler(
   res: Response,
   next: NextFunction
 ) {
-  const { id } = req.body;
+  const { id } = req.params;
   const integerId = Number(id);
 
 
