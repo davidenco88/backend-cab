@@ -9,9 +9,9 @@ import {
   getTripInfoByClientId,
   getTripInfoByDriverId,
 } from './trips.service'
-import sgMail from '@sendgrid/mail';
 import { sendMailSendGrid } from '../../auth/utils/validationMail';
 import { CreateTripType, tripsEmailCreatedData, CreateTripTypeCalculated } from './trips.type';
+import { Trips } from '@prisma/client';
 
 export async function createTripHandler(
   req: Request,
@@ -28,9 +28,9 @@ export async function createTripHandler(
     const a =
       Math.sin(dLat / 2) * Math.sin(dLat / 2) +
       Math.cos(lat1 * radians) *
-        Math.cos(lat2 * radians) *
-        Math.sin(dLon / 2) *
-        Math.sin(dLon / 2);
+      Math.cos(lat2 * radians) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     const calculatedDistance = 6371 * c; // Radio de la Tierra en kilómetros
 
@@ -59,8 +59,8 @@ export async function createTripHandler(
     travelDistance: distance,
     totalPrice: calculatedPrice,
     pickUpDate: new Date(rawData.pickUpDate),
-    isActive: true,
-}
+    isActive: false,
+  }
 
   try {
     const trip = await createTrip(data);
@@ -135,9 +135,9 @@ export async function createTripEmailHandler(
   res: Response,
   next: NextFunction
 ) {
-  const data: tripsEmailCreatedData = req.body;
+  const trip: Trips = req.body;
 
-  if (Object.keys(data).length === 0) {
+  if (Object.keys(trip).length === 0) {
     return res
       .status(400)
       .json({ message: 'Missing required information in the request body' });
@@ -146,7 +146,10 @@ export async function createTripEmailHandler(
   try {
     const url = `${process.env.FRONT_END_URL}/driver-travels/`;
     const dataMail = {
-      to: String(data.toEmail),
+      // Descomentar esta línea para implementar en producción
+      // to: String(trip.selectedVehicle.Users.email),
+      // La linea abajo solo debe funcionar para etapa de pruebas
+      to: 'david.sarria@correounivalle.edu.co',
       from: 'CAB <david.sarriav@gmail.com>', // Use the email address or domain you verified above
       subject: 'New trip scheduled from RICA CAB',
       templateId: 'd-0cad497e97f0412fb7bdba7cde87e8e8',
@@ -155,10 +158,10 @@ export async function createTripEmailHandler(
       },
     };
 
-    const integerId = Number(data.id);
+    const integerId = Number(trip.id);
     sendMailSendGrid(dataMail);
-    const trip = await updateTripStatus(integerId);
-    return res.status(200).json(dataMail);
+    const newTrip = await updateTripStatus(integerId);
+    return res.status(200).json(newTrip);
   } catch (error) {
     return next(error);
   }

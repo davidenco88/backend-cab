@@ -16,7 +16,7 @@ const tripRouter = Router();
 // /api/users --> POST
 tripRouter.post('/', createTripHandler);
 // /api/trips
-tripRouter.post('/mailtodriver', createTripEmailHandler);
+tripRouter.patch('/mailtodriver', createTripEmailHandler);
 // /api/users --> GET
 tripRouter.get('/', getAllTripHandler);
 
