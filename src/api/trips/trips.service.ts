@@ -67,3 +67,41 @@ export async function updateTripStatus(
   })
   return updatetrip;
 }
+
+export async function getTripInfoByDriverId(id: number) {
+  const trips = await prisma.trips.findMany({
+    where: {
+      Vehicles: {
+        driverID: id,
+      },
+    },
+    include: {
+      Vehicles: true,
+    },
+  });
+
+  return trips;
+}
+
+export async function getTripInfoByClientId(id: number) {
+  const trips = await prisma.trips.findMany({
+    where: {
+      clientID: id,
+    },
+    include: {
+      Vehicles: {
+        include: {
+          Users: {
+            select: {
+              name: true,
+              lastname: true,
+              avatar: true,
+              email: true,
+            }
+          },
+        },
+      },
+    },
+  });
+  return trips;
+}
