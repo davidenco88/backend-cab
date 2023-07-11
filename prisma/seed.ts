@@ -59,9 +59,9 @@ async function main() {
   });
   await prisma.vehicleTypes.createMany({
     data: [
-      { type: "Spacious", seats: 5, luggage: "25 lts", isActive: true, feeBase: 0.7 },
-      { type: "Luxury", seats: 3, luggage: "25 lts", isActive: true, feeBase: 1.0 },
-      { type: "Economic", seats: 4, luggage: "10 lts", isActive: true, feeBase: 0.4 },
+      { type: "Spacious", seats: 5, luggage: "25 lts", isActive: true, feeBase: 2 },
+      { type: "Luxury", seats: 3, luggage: "25 lts", isActive: true, feeBase: 3 },
+      { type: "Economic", seats: 4, luggage: "10 lts", isActive: true, feeBase: 1 },
     ],
     skipDuplicates: true,
   });

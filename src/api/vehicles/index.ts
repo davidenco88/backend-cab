@@ -3,6 +3,7 @@ import {
   createVehicleHandler,
   getAllVehicleHandler,
   getVehicleByIdHandler,
+  getVehiclesByDriverHandler,
   updateVehicleByIdHandler,
   deleteVehicleHandler,
   getAllAvailableVehicleHandler
@@ -19,6 +20,9 @@ vehicleRouter.get('/', getAllVehicleHandler);
 vehicleRouter.get('/availables', getAllAvailableVehicleHandler);
 // /api/users/:id --> GET
 vehicleRouter.get('/:id', getVehicleByIdHandler);
+
+// /api/vehicles/driver/:id --> GET
+vehicleRouter.get('/driver/:id', getVehiclesByDriverHandler);
 
 // /api/users --> PATHC
 vehicleRouter.patch('/:id', updateVehicleByIdHandler);
