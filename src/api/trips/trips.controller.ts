@@ -6,6 +6,7 @@ import {
   updateTrip,
   deleteTrip,
   updateTripStatus,
+  updateTripState,
   getTripInfoByClientId,
   getTripInfoByDriverId,
 } from './trips.service'
@@ -201,6 +202,28 @@ export async function getAlltripsTripByClientIdHandler(
 
   try {
     const trip = await getTripInfoByClientId(integerId);
+    return res.json(trip);
+  } catch (error) {
+    return next(error);
+  }
+}
+
+export async function updateTripStateByIdHandler(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+
+  const data: {
+    tripId: number,
+    state: number,
+  } = req.body;
+
+  const tripId = data.tripId;
+  const state = data.state;
+
+  try {
+    const trip = await updateTripState(tripId, state);
     return res.json(trip);
   } catch (error) {
     return next(error);

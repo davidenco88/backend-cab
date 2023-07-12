@@ -42,7 +42,7 @@ export async function deleteTrip(id: number) {
 export async function updateTrip(
   id: number,
   data: tripsCreateData
-  ) {
+) {
 
   const updatetrip = await prisma.trips.update({
     where: {
@@ -54,14 +54,14 @@ export async function updateTrip(
 }
 export async function updateTripStatus(
   id: number,
-  ) {
+) {
 
   const updatetrip = await prisma.trips.update({
     where: {
       id,
     },
-    data:{
-      tripStateId:1,
+    data: {
+      tripStateId: 1,
       isActive: true,
     }
   })
@@ -121,4 +121,19 @@ export async function getTripInfoByClientId(id: number) {
     },
   });
   return trips;
+}
+
+export async function updateTripState(
+  id: number, state: number
+) {
+
+  const updatetrip = await prisma.trips.update({
+    where: {
+      id,
+    },
+    data: {
+      tripStateId: state,
+    }
+  })
+  return updatetrip;
 }

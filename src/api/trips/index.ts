@@ -4,6 +4,7 @@ import {
   getAllTripHandler,
   getTripByIdHandler,
   updateTripByIdHandler,
+  updateTripStateByIdHandler,
   deleteTripHandler,
   createTripEmailHandler,
   getAlltripsTripByClientIdHandler,
@@ -29,7 +30,10 @@ tripRouter.get('/TripsByDriver/:id', getAlltripsTripByDriverIdHandler);
 // /api/users --> PATHC
 tripRouter.patch('/:id', updateTripByIdHandler);
 
-// /api/users --> DELETE
+// /api/users --> PATHC
+tripRouter.patch('/state/modify', updateTripStateByIdHandler);
+
+// // /api/users --> DELETE
 tripRouter.patch('/delete/:id', deleteTripHandler);
 
 
