@@ -74,9 +74,23 @@ export async function getTripInfoByDriverId(id: number) {
       Vehicles: {
         driverID: id,
       },
+      isActive:true,
     },
     include: {
-      Vehicles: true,
+      Vehicles:{
+        include: {
+          VehicleTypes:true,
+        }
+      },
+      Users: {
+        select: {
+          name: true,
+          lastname: true,
+          avatar: true,
+          email: true,
+        }
+      },
+      TripState:true,
     },
   });
 
@@ -87,10 +101,13 @@ export async function getTripInfoByClientId(id: number) {
   const trips = await prisma.trips.findMany({
     where: {
       clientID: id,
+      isActive: true
     },
     include: {
+      TripState:true,
       Vehicles: {
         include: {
+        VehicleTypes:true,
           Users: {
             select: {
               name: true,
