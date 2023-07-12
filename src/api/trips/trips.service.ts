@@ -76,7 +76,19 @@ export async function getTripInfoByDriverId(id: number) {
       },
     },
     include: {
-      Vehicles: true,
+      Vehicles:{
+        include: {
+          VehicleTypes:true,
+        }
+      },
+      Users: {
+        select: {
+          name: true,
+          lastname: true,
+          avatar: true,
+          email: true,
+        }
+      },
     },
   });
 
@@ -91,6 +103,7 @@ export async function getTripInfoByClientId(id: number) {
     include: {
       Vehicles: {
         include: {
+        VehicleTypes:true,
           Users: {
             select: {
               name: true,
