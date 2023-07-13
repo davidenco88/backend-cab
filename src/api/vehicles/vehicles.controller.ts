@@ -6,7 +6,8 @@ import {
   getVehiclesByDriver,
   updateVehicle,
   deleteVehicle,
-  getAllAvailableVehicles
+  getAllAvailableVehicles,
+  updateVehicleAvailavibility
 } from './vehicles.service'
 
 export async function createVehicleHandler(
@@ -116,6 +117,25 @@ export async function updateVehicleByIdHandler(
 
   try {
     const vehicle = await updateVehicle(integerId, data);
+    return res.json(vehicle);
+  } catch (error) {
+    return next(error);
+  }
+}
+
+export async function updateVehicleAvailavibilityHandler(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  console.log(req.body);
+  const { id } = req.body;
+  const integerId = Number(id);
+  const {available} = req.body;
+
+
+  try {
+    const vehicle = await updateVehicleAvailavibility(integerId, available);
     return res.json(vehicle);
   } catch (error) {
     return next(error);
