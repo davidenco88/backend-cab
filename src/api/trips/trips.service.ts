@@ -92,6 +92,9 @@ export async function getTripInfoByDriverId(id: number) {
       },
       TripState:true,
     },
+    orderBy: {
+      pickUpDate: 'desc',
+    },
   });
 
   return trips;
@@ -118,6 +121,9 @@ export async function getTripInfoByClientId(id: number) {
           },
         },
       },
+    },
+    orderBy: {
+      pickUpDate: 'desc',
     },
   });
   return trips;
