@@ -6,7 +6,7 @@ export type CreateUser = {
   name: string;
   lastname: string;
   email: string;
-  avatar: string;
+  avatar?: string;
   password: string;
   rol_id: number[];
 };

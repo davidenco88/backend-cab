@@ -15,7 +15,6 @@ export async function createUser(input: CreateUser) {
       name: input.name,
       lastname: input.lastname,
       email: input.email,
-      avatar: input.avatar,
       password: hashedPassword,
       passwordResetToken: hashPasswordResetToken,
       passwordResetExpires: passwordResetExpires,
