@@ -78,3 +78,16 @@ export async function updateVehicle(id: number, data: vehiclesCreateData) {
   });
   return updatevehicle;
 }
+
+export async function updateVehicleAvailavibility(id: number, isAvailable: boolean) {
+  console.log(id);
+  const deletedVehicle = await prisma.vehicles.update({
+    where: {
+      id,
+    },
+    data: {
+      isAvailable,
+    },
+  });
+  return deletedVehicle;
+}

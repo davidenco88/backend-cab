@@ -6,7 +6,8 @@ import {
   getVehiclesByDriverHandler,
   updateVehicleByIdHandler,
   deleteVehicleHandler,
-  getAllAvailableVehicleHandler
+  getAllAvailableVehicleHandler,
+  updateVehicleAvailavibilityHandler
 } from './vehicles.controller'
 
 const vehicleRouter = Router();
@@ -26,6 +27,7 @@ vehicleRouter.get('/driver/:id', getVehiclesByDriverHandler);
 
 // /api/users --> PATHC
 vehicleRouter.patch('/:id', updateVehicleByIdHandler);
+vehicleRouter.patch('/updateAvailability/:id', updateVehicleAvailavibilityHandler);
 
 // /api/users --> DELETE
 vehicleRouter.patch('/delete/:id', deleteVehicleHandler);
