@@ -151,7 +151,7 @@ export async function createTripEmailHandler(
   const driver = await getUserById(vehicle.driverID as number) as Users;
 
   try {
-    const url = `${process.env.FRONT_END_URL}`;
+    const url = `${process.env.FRONT_END_URL}/login`;
     const dataMail = {
       to: String(driver.email),
       from: 'CAB <david.sarriav@gmail.com>', // Use the email address or domain you verified above
