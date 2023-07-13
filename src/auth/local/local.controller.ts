@@ -91,7 +91,9 @@ export async function activateHandler(req: Request, res: Response) {
 
     const profile = {
       fullName: `${user.name} ${user.lastname}`,
+      id: user.id,
       avatar: user.avatar,
+      email: user.email,
       roles: user.UserByRole.map(({ Rol }) => ({
         id: Rol.id,
         name: Rol.name,
