@@ -151,12 +151,9 @@ export async function createTripEmailHandler(
   const driver = await getUserById(vehicle.driverID as number) as Users;
 
   try {
-    const url = `${process.env.FRONT_END_URL}/driver-travels/`;
+    const url = `${process.env.FRONT_END_URL}/login`;
     const dataMail = {
-      // Descomentar esta línea para implementar en producción
-      // to: String(driver.email),
-      // La linea abajo solo debe funcionar para etapa de pruebas
-      to: 'david.sarria@correounivalle.edu.co',
+      to: String(driver.email),
       from: 'CAB <david.sarriav@gmail.com>', // Use the email address or domain you verified above
       subject: 'New trip scheduled from RICA CAB',
       templateId: 'd-0cad497e97f0412fb7bdba7cde87e8e8',
