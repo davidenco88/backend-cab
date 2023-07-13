@@ -128,8 +128,7 @@ export async function updateVehicleAvailavibilityHandler(
   res: Response,
   next: NextFunction
 ) {
-  console.log(req.body);
-  const { id } = req.body;
+  const { id } = req.params;
   const integerId = Number(id);
   const {available} = req.body;
 
