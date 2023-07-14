@@ -24,15 +24,16 @@ async function main() {
       {
         name: 'David',
         lastname: 'Sarria',
-        email: 'david@mkir.com',
+        email: 'david.sarriav@gmail.com',
         avatar: 'https://url.zip/806f91e',
         password: hashedPassword_1,
         isActive: true,
       },
+
       {
         name: 'Federico',
         lastname: 'Cordoba',
-        email: 'federico@mkir.com',
+        email: 'federicoc03@gmail.com',
         avatar: 'https://url.zip/806f91e',
         password: hashedPassword_2,
         isActive: true,
@@ -40,7 +41,7 @@ async function main() {
       {
         name: 'Andres',
         lastname: 'Lopez',
-        email: 'andres@mkir.com',
+        email: 'eomerlopez@gmail.com',
         avatar: 'https://url.zip/806f91e',
         password: hashedPassword_3,
         isActive: true,
