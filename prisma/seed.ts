@@ -39,8 +39,8 @@ async function main() {
         isActive: true,
       },
       {
-        name: 'Andres',
-        lastname: 'Lopez',
+        name: 'Transportes',
+        lastname: 'Andres Lopez',
         email: 'eomerlopez@gmail.com',
         avatar: 'https://res.cloudinary.com/dltibnft3/image/upload/v1688949117/profile-images/blank-profile-picture_wagjpu.jpg',
         password: hashedPassword_3,
