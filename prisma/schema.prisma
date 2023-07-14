@@ -15,7 +15,7 @@ model Users {
   name                 String
   lastname             String
   email                String          @unique
-  avatar               String
+  avatar               String          @default("https://res.cloudinary.com/dltibnft3/image/upload/v1688949117/profile-images/blank-profile-picture_wagjpu.jpg")
   isActive             Boolean         @default(false)
   password             String
   passwordResetToken   String?         @unique
@@ -23,6 +23,7 @@ model Users {
   UserByRole           UserByRole[]
   DiscountCodes        DiscountCodes[]
   Vehicles             Vehicles[]
+  Trips                Trips[]
 }
 
 model Rol {
@@ -57,18 +58,19 @@ model Vehicles {
   VehicleTypes  VehicleTypes @relation(fields: [vehicleTypeID], references: [id])
   vehicleTypeID Int
   image         String
-  mark          String
-  line          String
-  model         Int
+  brand         String
+  model         String
+  year          Int
   plates        String
   isAvailable   Boolean      @default(true)
   isActive      Boolean      @default(true)
+  Trips         Trips[]
 }
 
 model VehicleTypes {
   id       Int        @id @default(autoincrement())
   Vehicles Vehicles[]
-  name     String
+  type     String
   seats    Int
   luggage  String
   feeBase  Int
@@ -76,19 +78,25 @@ model VehicleTypes {
 }
 
 model Trips {
-  id                Int            @id @default(autoincrement())
-  pickUpLatitude    String
-  pickUpLongitude   String
-  dropDownLatitude  String
-  dropDownLongitude String
-  travelledDistance Int
-  totalPrice        Int
-  pickUpDate        DateTime
-  DiscountCodes     DiscountCodes? @relation(fields: [discountCodeId], references: [id])
-  discountCodeId    Int?
-  TripState         TripState?     @relation(fields: [tripStateId], references: [id])
-  tripStateId       Int?
-  isActive          Boolean        @default(true)
+  id               Int            @id @default(autoincrement())
+  pickUpLatitude   String?
+  pickUpLongitude  String?
+  dropOffLatitude  String?
+  dropOffLongitude String?
+  pickUpAddress    String?
+  dropOffAddress   String?
+  Users            Users?         @relation(fields: [clientID], references: [id])
+  clientID         Int?
+  Vehicles         Vehicles?      @relation(fields: [vehicleID], references: [id])
+  vehicleID        Int?
+  travelDistance   Float?
+  totalPrice       Float?
+  pickUpDate       DateTime?
+  DiscountCodes    DiscountCodes? @relation(fields: [discountCodeId], references: [id])
+  discountCodeId   Int?
+  TripState        TripState?     @relation(fields: [tripStateId], references: [id])
+  tripStateId      Int?
+  isActive         Boolean?       @default(true)
 }
 
 model TripState {

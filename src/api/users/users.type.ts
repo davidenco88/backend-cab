@@ -6,7 +6,7 @@ export type CreateUser = {
   name: string;
   lastname: string;
   email: string;
-  avatar: string;
+  avatar?: string;
   password: string;
   rol_id: number[];
 };
@@ -30,7 +30,6 @@ export type UserWithRoles = {
 };
 
 export type updateUser = {
-  id: number;
   name?: string;
   lastname?: string;
   email?: string;
@@ -39,4 +38,12 @@ export type updateUser = {
   password?: string;
   passwordResetToken?: string;
   passwordResetExpires?: string;
+};
+
+export type updateUserAvatar = {
+  id?: number;
+  name?: string;
+  lastname?: string;
+  email?: string;
+  avatar?: string;
 };

@@ -3,9 +3,11 @@ import {
   createVehicleHandler,
   getAllVehicleHandler,
   getVehicleByIdHandler,
+  getVehiclesByDriverHandler,
   updateVehicleByIdHandler,
   deleteVehicleHandler,
-  getAllAvailableVehicleHandler
+  getAllAvailableVehicleHandler,
+  updateVehicleAvailavibilityHandler
 } from './vehicles.controller'
 
 const vehicleRouter = Router();
@@ -16,12 +18,16 @@ vehicleRouter.post('/', createVehicleHandler);
 // /api/users --> GET
 vehicleRouter.get('/', getAllVehicleHandler);
 
-vehicleRouter.get('/actives', getAllAvailableVehicleHandler);
+vehicleRouter.get('/availables', getAllAvailableVehicleHandler);
 // /api/users/:id --> GET
 vehicleRouter.get('/:id', getVehicleByIdHandler);
 
+// /api/vehicles/driver/:id --> GET
+vehicleRouter.get('/driver/:id', getVehiclesByDriverHandler);
+
 // /api/users --> PATHC
 vehicleRouter.patch('/:id', updateVehicleByIdHandler);
+vehicleRouter.patch('/updateAvailability/:id', updateVehicleAvailavibilityHandler);
 
 // /api/users --> DELETE
 vehicleRouter.patch('/delete/:id', deleteVehicleHandler);
