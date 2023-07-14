@@ -12,3 +12,16 @@ export type createVehicle = {
   isAvailable?: boolean;
   isActive?: boolean;
 }
+
+export type testCreateVehicle = {
+    id?: number;
+    driverID: number;
+    vehicleTypeID: number;
+    image: string;
+    brand: string;
+    model: string;
+    year: number;
+    plates: string;
+    isAvailable: boolean;
+    isActive: boolean;
+}

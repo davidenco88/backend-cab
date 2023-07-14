@@ -7,8 +7,11 @@ import {
   updateVehicleByIdHandler,
   deleteVehicleHandler,
   getAllAvailableVehicleHandler,
-  updateVehicleAvailavibilityHandler
+  updateVehicleAvailavibilityHandler,
+  testcreateVehicle
 } from './vehicles.controller'
+import multer from 'multer';
+const upload = multer({ dest: './temp' })
 
 const vehicleRouter = Router();
 
@@ -31,6 +34,8 @@ vehicleRouter.patch('/updateAvailability/:id', updateVehicleAvailavibilityHandle
 
 // /api/users --> DELETE
 vehicleRouter.patch('/delete/:id', deleteVehicleHandler);
+
+vehicleRouter.post('/testCreateVehicle', upload.single('image'), testcreateVehicle);
 
 
 export default vehicleRouter;
