@@ -1,9 +1,9 @@
 import { PrismaClient } from '@prisma/client';
-import { vehiclesCreateData, createVehicle } from './vehicles.type';
+import { vehiclesCreateData, createVehicle, testCreateVehicle } from './vehicles.type';
 
 const prisma = new PrismaClient();
 
-export async function createVehicle(data: vehiclesCreateData) {
+export async function createVehicle(data: testCreateVehicle) {
   const vehicle = await prisma.vehicles.create({
     data,
   });
