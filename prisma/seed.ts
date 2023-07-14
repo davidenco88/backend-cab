@@ -29,6 +29,7 @@ async function main() {
         password: hashedPassword_1,
         isActive: true,
       },
+
       {
         name: 'Federico',
         lastname: 'Cordoba',
